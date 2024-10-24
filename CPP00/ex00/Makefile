@@ -10,7 +10,7 @@ RM		= rm -rf
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) Makefile
 		$(CC) $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
