@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 18:37:34 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/24 17:45:18 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/10/24 17:07:04 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/10/24 17:45:22 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_H
-# define PHONEBOOK_CLASS_H
+#include "myphonebook.hpp"
 
-class	PhoneBook {
-	public:
-		PhoneBook(void);
-	//	~PhoneBook(void);
-		void	add_contact();
-};
+PhoneBook::PhoneBook(void) {
+}
 
-#endif
+//PhoneBook::~PhoneBook(void) {
+//}
+
+void PhoneBook::add_contact() {
+	std::string	name;
+
+	std::cout << "Enter a name: " << std::endl;
+	std::getline(std::cin, name);
+	std::cout << "You enter " << name << std::endl;
+}
