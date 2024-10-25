@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:48:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/24 18:29:31 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:46:31 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main()
 {
 	PhoneBook	phonebook;
 	std::string	input;
+	int			index;
 
 	std::cout << "Welcome to your phonebook!" << std::endl;
 	std::cout << "This program only accepts ADD, SEARCH and EXIT commands." <<std::endl;
@@ -35,7 +36,12 @@ int	main()
 		if (input.compare("ADD") == 0)
 			phonebook.add_contact();
 		else if (input.compare("SEARCH") == 0)
-			std::cout << "you type " << input << std::endl;
+		{
+			std::cout << "Insert Index: ";
+			std::cin >> index;
+			phonebook.print_contact(index);
+			//std::cout << "you type " << input << std::endl;
+		}
 		else if (input.compare("EXIT") == 0)
 		{
 			std::cout << "Goodbye!" << std::endl;

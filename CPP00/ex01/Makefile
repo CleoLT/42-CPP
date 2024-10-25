@@ -10,7 +10,7 @@ INC_DIR	= inc/
 SRC_DIR	= src/
 OBJ_DIR	= obj/
 
-FILES	= main PhoneBook 
+FILES	= main PhoneBook Contact 
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(FILES)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
