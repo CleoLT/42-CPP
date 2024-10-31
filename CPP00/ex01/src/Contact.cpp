@@ -6,13 +6,16 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:28:44 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/25 14:13:20 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:31:42 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "myphonebook.hpp"
 
 Contact::Contact(void) {
+}
+
+Contact::~Contact(void) {
 }
 
 void	Contact::set_data(std::string first_name, std::string last_name, std::string nickname, std::string phone_num, std::string secret) {

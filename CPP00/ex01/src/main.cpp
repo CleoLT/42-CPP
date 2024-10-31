@@ -6,20 +6,11 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:48:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/31 17:16:45 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:40:56 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "myphonebook.hpp"
-
-std::string	get_input(std::string type)
-{
-	std::string	input;
-
-	std::cout << type;
-	std::getline(std::cin, input);
-	return input;
-}
 
 int	main()
 {
@@ -32,7 +23,6 @@ int	main()
 	std::cout << "This program only accepts ADD, SEARCH and EXIT commands." <<std::endl;
 	while (1) 
 	{
-	//	std::getline(std::cin, input);
 		input = get_input("\033[92m>>\033[0m ");
 		if (input.compare("ADD") == 0)
 		{
@@ -65,7 +55,6 @@ int	main()
 		}
 		else if (input.length() > 0)
 			std::cerr << "Error: '" << input << "': invalid input. You must type ADD, SEARCH or EXIT." << std::endl;
-	//	std::cout << "wtf "  << std::endl;
 	}
 	return 0;
 }
