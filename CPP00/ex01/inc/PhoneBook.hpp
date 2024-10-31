@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 18:37:34 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/25 14:31:40 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:59:35 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ class	PhoneBook {
 private:
 	Contact contact[8];
 //	int		index;
-//	int		size;
+	int		size;
+
 public:
 	PhoneBook(void);
 //	~PhoneBook(void);
-	void	add_contact();
+	int		get_size_contact();
+	void	add_contact(int index);
 	void	print_contact(int index);
+	void	display_contacts();
 };
 
 #endif
