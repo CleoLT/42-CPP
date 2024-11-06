@@ -6,11 +6,12 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:42:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/06 19:08:16 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:58:43 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <ctime>
 #include "Account.hpp"
 
 int	Account::_nbAccounts = 0;
@@ -19,12 +20,13 @@ int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
 
 Account::Account( int initial_deposit ) {
+	t::_displayTimestamp();
 	this->_amount = initial_deposit;
-	this->_totalAmount += initial_deposit;
-	this->_accountIndex = this->_nbAccounts;
-	this->_nbAccounts ++;
+	this->_accountIndex = t::_nbAccounts;
 	this->_nbDeposits = 0;
 	this->_nbWithdrawals = 0;
+	t::_totalAmount += initial_deposit;
+	t::_nbAccounts ++;
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";amount:" << this->_amount;
 	std::cout << ";created" << std::endl;
@@ -71,8 +73,8 @@ void	Account::makeDeposit( int deposit ) {
 
 	this->_amount += deposit;
 	this->_nbDeposits += 1;
-	this->_totalAmount += deposit;
-	this->_totalNbDeposits ++;
+	t::_totalAmount += deposit;
+	t::_totalNbDeposits ++;
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";p_amount:" << p_amount;
 	std::cout << ";deposit:" << deposit;
@@ -90,10 +92,16 @@ bool	Account::makeWithdrawal( int withdrawal ) {
 	}
 	this->_amount -= withdrawal;
 	this->_nbWithdrawals += 1;
-	this->_totalAmount -= withdrawal;
-	this->_totalNbWithdrawals ++;
+	t::_totalAmount -= withdrawal;
+	t::_totalNbWithdrawals ++;
 	std::cout << ";withdrawal:" << withdrawal;
 	std::cout << ";amount:" << this->_amount;
 	std::cout << ";nb_withdrawals:" << this->_nbWithdrawals << std::endl;
 	return true;
+}
+
+void	Account::_displayTimestamp( void ) {
+	time_t	timer;
+	time(&timer);
+	std::cout << "[" << timer << "]";
 }
