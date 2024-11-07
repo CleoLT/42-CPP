@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:42:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/06 19:58:43 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:00:43 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ Account::Account( int initial_deposit ) {
 }
 
 Account::~Account( void ) {
+	t::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";amount:" << this->_amount;
 	std::cout << ";closed" << std::endl;
@@ -55,6 +56,7 @@ int	Account::getNbWithdrawals( void ) {
 }
 
 void	Account::displayAccountsInfos( void ) {
+	t::_displayTimestamp();
 	std::cout << "accounts:" << t::getNbAccounts();
 	std::cout << ";total:" << t::getTotalAmount();
 	std::cout << ";deposits:" << t::getNbDeposits();
@@ -62,6 +64,7 @@ void	Account::displayAccountsInfos( void ) {
 }
 
 void	Account::displayStatus( void ) const {
+	t::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";amount:" << this->_amount;
 	std::cout << ";deposits:" << this->_nbDeposits;
@@ -75,6 +78,7 @@ void	Account::makeDeposit( int deposit ) {
 	this->_nbDeposits += 1;
 	t::_totalAmount += deposit;
 	t::_totalNbDeposits ++;
+	t::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";p_amount:" << p_amount;
 	std::cout << ";deposit:" << deposit;
@@ -83,6 +87,7 @@ void	Account::makeDeposit( int deposit ) {
 }
 
 bool	Account::makeWithdrawal( int withdrawal ) {
+	t::_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex;
 	std::cout << ";p_amount:" << this->_amount;
 	if (withdrawal > this->_amount)
@@ -101,7 +106,12 @@ bool	Account::makeWithdrawal( int withdrawal ) {
 }
 
 void	Account::_displayTimestamp( void ) {
-	time_t	timer;
+	time_t		timer;
+	struct tm	*timeinfo;
+	char		buffer[18];
+
 	time(&timer);
-	std::cout << "[" << timer << "]";
+	timeinfo = localtime(&timer);
+	strftime(buffer, 18, "[%Y%m%d_%H%M%S]", timeinfo);
+	std::cout << buffer;
 }
