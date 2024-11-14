@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:13:29 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/14 14:25:34 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:28:37 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -18,7 +18,7 @@ int	main ( void ) {
 	std::string&	stringREF = string;
 
 	std::cout << "string address:		" << &string << std::endl;
-	std::cout << "stringPTR address:	" << &stringPTR << std::endl;
+	std::cout << "stringPTR address:	" << stringPTR << std::endl;
 	std::cout << "stringREF address:	" << &stringREF << std::endl;
 	std::cout << std::endl;
 	std::cout << "string value:			" << string << std::endl;
