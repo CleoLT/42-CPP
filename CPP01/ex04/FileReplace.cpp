@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:38:38 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/21 15:08:36 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:19:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	FileReplace::copyAndReplaceContent( void ) {
 		std::getline(this->ifs, input);
 		while (1) {
 			found = input.find(this->_s1, found);
-			std::cout << "error" << found  << std::endl;
 			if (found == std::string::npos)
 				break;
 			tmp = input.substr(0, found) + input.substr(found + _s1.length());
