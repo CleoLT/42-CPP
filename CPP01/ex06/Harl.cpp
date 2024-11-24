@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:11:40 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/22 14:51:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:27:26 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,42 @@
 #include <iostream>
 #include <string>
 
-Harl::Harl( void ) { }
+Harl::Harl( std::string level ) : strLevel(level) { 
+	setLevel();
+	}
 
 Harl::~Harl( void ) { }
 
 void	Harl::debug( void ) {
-	std::cout << "debug level 1" << std::endl;
+	std::cout << "debug	level 1" << std::endl;
 }
 
 void	Harl::info( void ) {
-	std::cout << "info level 2" << std::endl;
+	std::cout << "info	level 2" << std::endl;
 }
 
 void	Harl::warning( void ) {
-	std::cout << "warning level 3" << std::endl;
+	std::cout << "warning	level 3" << std::endl;
 }
 
 void	Harl::error( void ) {
-	std::cout << "error level 4" << std::endl;
+	std::cout << "error	level 4" << std::endl;
 }
 
-void	Harl::setLevel( std::string level ) {
+void	Harl::setLevel( void ) {
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	
 	for (int i = 0; i < 4; i++) {
-		if (level == levels[i]) {
-			this->level = i + 1;
+		if (this->strLevel == levels[i]) {
+			this->intLevel = i + 1;
 			return;
 		}
 	}
-	this->level = 0;
+	this->intLevel = 0;
 }
 
-void	Harl::complain( std::string level ) {
-	setLevel(level);
-	switch (this->level) {
+void	Harl::complain( void ) {
+	switch (this->intLevel) {
 		case DEBUG:
 			debug();
 		case INFO:
