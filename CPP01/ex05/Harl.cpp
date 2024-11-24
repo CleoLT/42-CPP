@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:11:40 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/22 14:29:17 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:49:15 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ void	Harl::error( void ) {
 	std::cout << "error level 4" << std::endl;
 }
 
+void	Harl::complain( std::string level ) {
+	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void		(Harl::*f[4])( void ) = {	&Harl::debug, 
+											&Harl::info, 
+											&Harl::warning, 
+											&Harl::error };
+	
+	for ( int i = 0; i < 4; i++) {
+		if (level == levels[i]) {
+			(this->*f[i])();
+			return;
+		}
+	}
+	std::cout << "Invalid level, try again!" << std::endl;	
+}
+
+/*
+
 void	Harl::setLevel( std::string level ) {
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	
@@ -44,7 +62,6 @@ void	Harl::setLevel( std::string level ) {
 		}
 	}
 	this->level = 0;
-//	std::cout << "Invalid level, try again!" << std::endl;
 }
 
 void	Harl::complain( std::string level ) {
@@ -70,3 +87,6 @@ void	Harl::complain( std::string level ) {
 	}
 	(this->*f)();
 }
+
+
+*/
