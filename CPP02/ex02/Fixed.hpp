@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:13:41 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:08:30 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:53:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ public:
 	float	operator-( Fixed const rhs );
 	float	operator*( Fixed const rhs );
 	float	operator/( Fixed const rhs );
+
+	Fixed	operator++( void );
+	Fixed	operator--( void );
+	Fixed	operator++( int );
+	Fixed	operator--( int );
 
 	int		getRawBits( void ) const;
 	void	setRawBits( int const raw );

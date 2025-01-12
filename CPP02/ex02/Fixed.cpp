@@ -6,46 +6,41 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:20:22 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:10:13 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:53:23 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cmath>
+#include <cfloat>
 #include "Fixed.hpp"
 
 int const	Fixed::bits = 8;
 
 Fixed::Fixed( void ) : nb( 0 ) {
-//	std::cout << "Default constructor called" << std::endl;
 	return;
 }
 
 Fixed::Fixed( int const value ) {
 	setRawBits( value * 1 << bits );
-//	std::cout << "Int constructor called" << std::endl;
 	return;
 }
 
 Fixed::Fixed( float const value ) {
 	setRawBits( roundf( value * float( 1 << bits ) ) );
-//	std::cout << "Float constructor called " << std::endl;
 	return;
 }
 
 Fixed::Fixed( Fixed const & src ) {
-//	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 	return;
 }
 
 Fixed::~Fixed( void ) {
-//	std::cout << "Destructor called" << std::endl;
 	return;
 }
 
 Fixed &	Fixed::operator=( Fixed const & rhs ) {
-//	std::cout << "Copy assignment operator called" << std::endl;
 	if ( this != &rhs )
 		this->nb = rhs.getRawBits();
 	return *this;
@@ -107,6 +102,28 @@ float	Fixed::operator*( Fixed const rhs ) {
 
 float	Fixed::operator/( Fixed const rhs ) {
 	return this->toFloat() / rhs.toFloat();
+}
+
+Fixed	Fixed::operator++( void ) {
+	this->nb++;
+	return *this;
+}
+
+Fixed	Fixed::operator--( void ) {
+	this->nb--;
+	return *this;
+}
+
+Fixed	Fixed::operator++( int ) {
+	Fixed	tmp = *this;
+	this->nb++;
+	return tmp;
+}
+
+Fixed	Fixed::operator--( int ) {
+	Fixed	tmp = *this;
+	this->nb--;
+	return tmp;
 }
 
 int	Fixed::getRawBits( void ) const {

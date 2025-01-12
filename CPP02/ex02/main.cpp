@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:38:46 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:20:31 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:47:55 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int main( void ) {
 		std::cout << "not equal !=" << std::endl;
 
 	std::cout << a << std::endl;
-//	std::cout << ++a << std::endl;
-//	std::cout << a << std::endl;
-//	std::cout << a++ << std::endl;
-//	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
 
 	std::cout << b << std::endl;
 
