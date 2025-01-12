@@ -6,11 +6,12 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:20:22 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/04 18:38:02 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:25:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cmath>
 #include "Fixed.hpp"
 
 int const	Fixed::bits = 8;
@@ -20,13 +21,15 @@ Fixed::Fixed( void ) : nb( 0 ) {
 	return;
 }
 
-Fixed::Fixed( int const value ) : nb( value ) {
+Fixed::Fixed( int const value ) {
+	setRawBits( value * 1 << bits );
 	std::cout << "Int constructor called" << std::endl;
 	return;
 }
 
-Fixed::Fixed( float const value ) : nb( value ) {
-	std::cout << "Float constructor called" << std::endl;
+Fixed::Fixed( float const value ) {
+	setRawBits( roundf( value * float( 1 << bits ) ) );
+	std::cout << "Float constructor called " << std::endl;
 	return;
 }
 
@@ -53,12 +56,19 @@ int	Fixed::getRawBits( void ) const {
 }
 
 void	Fixed::setRawBits( int const raw ) {
-	std::cout << "setRawBits member function called" << std::endl;
 	this->nb = raw;
 	return;
 }
 
+float	Fixed::toFloat( void ) const {
+	return float( this->getRawBits() ) / float( 1 << bits );
+}
+
+int	Fixed::toInt( void ) const {
+	return int( this->nb * 1 >> bits );
+}
+
 std::ostream &	operator<<( std::ostream & o, Fixed const & rhs ) {
-	o << rhs.getRawBits();
+	o << rhs.toFloat();
 	return o;
 }

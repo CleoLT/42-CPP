@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:13:41 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/04 18:22:32 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:17:47 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ public:
 	
 	int		getRawBits( void ) const;
 	void	setRawBits( int const raw );
-//	float	toFloat( void ) const;
-//	int		toInt( void ) const;
+	float	toFloat( void ) const;
+	int		toInt( void ) const;
 };
 
 std::ostream &	operator<<(std::ostream & o, Fixed const & rhs);
