@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:38:46 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:47:55 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:20:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int main( void ) {
 
 	std::cout << b << std::endl;
 
-//	std::cout << Fixed::max( a, b ) << std::endl;
-	
+	std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << Fixed::max( b, a ) << std::endl;
+
+	std::cout << Fixed::min( a, d ) << std::endl;
+	std::cout << Fixed::min( d, a ) << std::endl;
+
 	return 0;
 }

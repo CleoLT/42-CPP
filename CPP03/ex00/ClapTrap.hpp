@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Point.hpp                                          :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 15:33:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/22 19:54:46 by cle-tron         ###   ########.fr       */
+/*   Created: 2025/01/22 18:51:16 by cle-tron          #+#    #+#             */
+/*   Updated: 2025/01/22 19:35:06 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_HPP
-#define POINT_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-#include "Fixed.hpp"
+#include <iostream>
 
-class	Point {
+class	ClapTrap {
 private:
-	Fixed const	x;
-	Fixed const y;
+	std::string		name;
+	unsigned int	hit;
+	unsigned int	energy;
+	unsigned int	damage;
 
 public:
-	Point( void );
-	Point( float const x, float const y);
-	Point( Point const & src );
-	Point & operator=( Point const & rhs );
-	~Point( void );
+	ClapTrap( void );
+	ClapTrap( std::string str );
+	ClapTrap( ClapTrap & src );
+	~ClapTrap( void );
+	ClapTrap & operator=( ClapTrap & rhs);
 
-	float	getValueX( void ) const;
-	float	getValueY( void ) const;
+	void	attack( const std::string & target );
+	void	takeDamage( unsigned int amount );
+	void	beRepaired( unsigned int amount );
 };
-
-bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif

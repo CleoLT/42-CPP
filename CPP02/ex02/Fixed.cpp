@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:20:22 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:53:23 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:19:43 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,34 @@ float	Fixed::toFloat( void ) const {
 
 int	Fixed::toInt( void ) const {
 	return int( this->nb * 1 >> bits );
+}
+
+Fixed &			Fixed::min( Fixed & first, Fixed & second ) {
+	if ( first.getRawBits() <= second.getRawBits() )
+		return first;
+	else
+		return second;
+}
+
+const Fixed &	Fixed::min( Fixed const & first, Fixed const & second ) {
+	if ( first.getRawBits() <= second.getRawBits() )
+		return first;
+	else
+		return second;
+}
+
+Fixed &			Fixed::max( Fixed & first, Fixed & second ) {
+	if ( first.getRawBits() >= second.getRawBits() )
+		return first;
+	else
+		return second;
+}
+
+const Fixed &	Fixed::max( Fixed const & first, Fixed const & second ) {
+	if ( first.getRawBits() >= second.getRawBits() )
+		return first;
+	else
+		return second;
 }
 
 std::ostream &	operator<<( std::ostream & o, Fixed const & rhs ) {

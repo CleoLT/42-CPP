@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:13:41 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/12 19:53:21 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:19:43 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ public:
 	void	setRawBits( int const raw );
 	float	toFloat( void ) const;
 	int		toInt( void ) const;
+
+	static Fixed &			min( Fixed & first, Fixed & second );
+	const static Fixed &	min( Fixed const & first, Fixed const & second );
+	static Fixed &			max( Fixed & first, Fixed & second );
+	const static Fixed &	max( Fixed const & first, Fixed const & second );
 };
 
 std::ostream &	operator<<(std::ostream & o, Fixed const & rhs);

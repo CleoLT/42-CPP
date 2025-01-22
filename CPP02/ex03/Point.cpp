@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:33:44 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/21 17:59:14 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:54:46 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,3 @@ float	Point::getValueX( void ) const {
 float	Point::getValueY( void ) const {
 	return this->y.toFloat();
 }
-/*
-void	Point::setValueX( float const nb ) {
-	this->x.setRawBits( roundf( nb * float( 1 << 8 ) ) );
-	return;
-}
-
-void	Point::setValueY( float const nb ) {
-	this->y.setRawBits( roundf( nb * float( 1 << 8 ) ) );
-	return;
-}
-
-
-void	Point::increaseX( void ) {
-	this->x++;
-	return;
-}
-
-void	Point::increaseY( void ) {
-	this->y++;
-	return;
-}*/
-
