@@ -1,4 +1,4 @@
-NAME	= clap
+NAME	= claptrap
 
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
@@ -9,17 +9,17 @@ OBJS	= $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) Makefile ClapTrap.hpp
+$(NAME): $(OBJS)	
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.cpp: $(OBJS)
-		$(CC) $(CFLAGS) >@ -c <$ -o
+%.o: %.cpp  Makefile ClapTrap.hpp
+		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		$(RM) $(OBJS)
 	
 fclean:	clean
-		$(RN) $(NAME)
+		$(RM) $(NAME)
 
 re:	fclean all
 
