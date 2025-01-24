@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 18:51:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/24 13:13:31 by cle-tron         ###   ########.fr       */
+/*   Created: 2025/01/24 11:14:23 by cle-tron          #+#    #+#             */
+/*   Updated: 2025/01/24 12:39:22 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef	SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
 #include <iostream>
 
-int	main( void ) {
-	ClapTrap	jammie( "Jammie" );
-	ClapTrap	random;
-	ClapTrap	a( "Jinks" );
-	ClapTrap	b = a;
-	ClapTrap	x;
+class	ScavTrap : public ClapTrap {
+//private:
 
-	int			i = 0;
+public:
+	ScavTrap( void );
+	ScavTrap( std::string str );
+	ScavTrap( ScavTrap const & src );
+	~ScavTrap( void );
 
-	jammie.attack( "alguien" );
-	jammie.takeDamage( 10 );
-	jammie.beRepaired( 3 );
+	ScavTrap & operator=( ScavTrap const & rhs );
 	
-	while ( i < 12 )
-	{
-		random.attack( "somebody" );
-		i++;
-	}
+	void	attack( const std::string & target );
+	void	guardGate( void );
+};
 
-	b.takeDamage( 5 );
-	b.beRepaired( 5 );
-	x = jammie;
-	x.takeDamage( 40 );
-}
+#endif
