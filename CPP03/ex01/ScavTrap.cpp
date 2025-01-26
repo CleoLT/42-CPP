@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:14:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/24 13:23:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:42:28 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ ScavTrap::ScavTrap( std::string str ) : ClapTrap( str ){
 	std::cout << name << " ScavTrap created" << std::endl;
 	return;
 }
-/*
-NOFUCIONAAAAAAA
+
 ScavTrap::ScavTrap( ScavTrap const & src ) : ClapTrap( src ) {
 	std::cout << "ScavTrap " << src.name << " copy created" << std::endl;
 	return;
 }
-*/
+
 ScavTrap::~ScavTrap( void ) {
 	std::cout << "ScavTrap destroyed" << std::endl;
 	return;
@@ -60,3 +59,8 @@ void	ScavTrap::attack( const std::string & target ) {
 	return;
 }
 
+void	ScavTrap::guardGate( void ) {
+	std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode!";
+	std::cout << std::endl;
+	return;
+}

@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 18:51:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/24 13:14:25 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:41:07 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	main( void ) {
 	ScavTrap	jammie( "Jammie" );
 	ScavTrap	random;
-//	ScavTrap	x( jammie );
+	ScavTrap	x( jammie );
 	ScavTrap	a( "Jinks" );
 	ScavTrap	b;
 	b = a;
@@ -33,4 +33,7 @@ int	main( void ) {
 	}
 	b.takeDamage( 5 );
 	b.beRepaired( 5 );
+	x.takeDamage( 34 );
+	x.guardGate();
+	x.beRepaired( 34 );
 }

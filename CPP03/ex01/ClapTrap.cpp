@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 18:51:20 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/24 12:05:37 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:34:01 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ClapTrap::ClapTrap( std::string str ) : name( str ), hit( 10 ),
 	return;
 }
 
-ClapTrap::ClapTrap( ClapTrap & src ) {
+ClapTrap::ClapTrap( const ClapTrap & src ) {
 	*this = src;
 	std::cout << "Copy constuctor called" << std::endl;
 	return;
@@ -36,7 +36,7 @@ ClapTrap::~ClapTrap( void ) {
 	return;
 }
 
-ClapTrap &	ClapTrap::operator=( ClapTrap & rhs ) {
+ClapTrap &	ClapTrap::operator=( const ClapTrap & rhs ) {
 	if ( this != &rhs )
 	{
 		this->name = rhs.name;
