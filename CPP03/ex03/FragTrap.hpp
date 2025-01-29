@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:49:41 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/26 12:29:53 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:52:17 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-class	FragTrap : public ClapTrap {
+class	FragTrap : virtual public ClapTrap {
 public:
 	FragTrap( void );
 	FragTrap( const std::string & str );

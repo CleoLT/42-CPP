@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:14:23 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/26 11:40:44 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:52:17 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-class	ScavTrap : public ClapTrap {
+class	ScavTrap : virtual public ClapTrap {
 public:
 	ScavTrap( void );
 	ScavTrap( std::string str );

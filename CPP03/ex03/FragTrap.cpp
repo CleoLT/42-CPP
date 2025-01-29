@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:49:54 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/26 12:30:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:52:25 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ FragTrap &	FragTrap::operator=( const FragTrap & rhs ) {
 }
 
 void	FragTrap::highFivesGuys( void ) const {
+	if ( this->checkDoAction() )
+		return;
 	std::cout << "FragTrap " << name << " requests a high five!" << std::endl;
 	return;
 }
