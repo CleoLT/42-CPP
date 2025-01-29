@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:04:23 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/29 19:49:26 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:52:38 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ DiamondTrap::DiamondTrap( void ) : ClapTrap( "default_diamond_clap_trap" ) {
 	std::cout << "Default DiamondTrap created" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( std::string str ) : ClapTrap( str + "_clap_trap" ) {//,
-											//  ScavTrap(),
-											  //FragTrap() {
+DiamondTrap::DiamondTrap( std::string str ) : ClapTrap( str + "_clap_trap" ),
+											  ScavTrap(),
+											  FragTrap() {
 	name = str;
 	hit = FragTrap::hit;
 	energy = ScavTrap::energy;
