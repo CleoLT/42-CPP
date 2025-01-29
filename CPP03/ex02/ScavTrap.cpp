@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:14:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/01/26 11:42:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:54:16 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	ScavTrap::attack( const std::string & target ) {
 }
 
 void	ScavTrap::guardGate( void ) {
+	if ( this->checkDoAction() )
+		return;
 	std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode!";
 	std::cout << std::endl;
 	return;
