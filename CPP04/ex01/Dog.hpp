@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:57:58 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/06 17:53:42 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:45:43 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class	Dog : public Animal {
 public:
 	Dog( void );
 	Dog( const Dog & src );
-	~Dog( void );
+	virtual ~Dog( void );
 
 	Dog & operator=( const Dog & rhs );
 

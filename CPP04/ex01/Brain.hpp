@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 16:57:58 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/06 17:53:42 by cle-tron         ###   ########.fr       */
+/*   Created: 2025/02/06 15:57:26 by cle-tron          #+#    #+#             */
+/*   Updated: 2025/02/06 17:02:42 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <string>
-#include "Animal.hpp"
 
-class	Dog : public Animal {
-public:
-	Dog( void );
-	Dog( const Dog & src );
-	~Dog( void );
+class	Brain {
+private :
+	std::string	ideas[100];
 
-	Dog & operator=( const Dog & rhs );
+public :
+	Brain( void );
+	Brain( const Brain & src );
+	~Brain( void );
 
-	virtual void	makeSound( void ) const;
+	Brain &	operator=( const Brain & rhs );
 };
 
 #endif
-
