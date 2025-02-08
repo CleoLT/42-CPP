@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:57:45 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/07 14:44:32 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:34:38 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "Cat.hpp"
 
 int main( void ) {
-//	const AAnimal*	meta = new AAnimal();
 	const AAnimal*	j = new Dog();
 	const AAnimal*	i = new Cat();
 	const Cat*		cat = new Cat();
@@ -25,19 +24,16 @@ int main( void ) {
 	dog = j;
 
 	std::cout << std::endl;	
-//	std::cout << meta->getType() << std::endl;
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
 	std::cout << catcopy->getType() << " " << std::endl;
 	std::cout << dog->getType() << " " << std::endl;
 	i->makeSound();
 	j->makeSound();
-//	meta->makeSound();
 	catcopy->makeSound();
 	dog->makeSound();
 
 	std::cout << std::endl;
-//	delete meta;
 	delete j;
 	delete i;
 	delete cat;

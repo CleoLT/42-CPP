@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:57:55 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/07 14:41:15 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:34:38 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,4 @@ AAnimal &	AAnimal::operator=( const AAnimal & rhs ) {
 std::string	AAnimal::getType( void ) const {
 	return this->type;
 }
-/*
-void	AAnimal::makeSound( void ) const {
-	std::cout << "AAnimal sound: *Rrrrandom!*" << std::endl;
-	return;
-}*/
+
