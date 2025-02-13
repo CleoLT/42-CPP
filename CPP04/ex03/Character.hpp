@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:55:04 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/08 14:23:15 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:59:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 class	Character : public ICharacter {
 private :
 	std::string	name;
-	AMateria	inventory[4];
+	AMateria*	inventory[4];
 
 public :
 	Character( void );
