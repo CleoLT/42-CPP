@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:44:41 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/08 13:16:12 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:57:13 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class	ICharacter;
 class	AMateria {
 protected :
 	std::string	type;
-
+		
 public :
 	AMateria( void );
 	AMateria( std::string const & type );

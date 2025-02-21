@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:55:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/13 18:47:45 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:59:13 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,36 +68,51 @@ std::string const &	Character::getName( void ) const {
 void	Character::equip( AMateria* m ) {
 	if ( !m )
 		return;
-	for( int i = 0; i < 4; i++ )
-		if( m == this->inventory[i] )
-			return;
 	for( int i = 0; i < 4; i++ ) {
 		if ( !this->inventory[i] ) {
 			this->inventory[i] = m->clone();
-			delete m;
-			m = NULL;
-			break;
+			return;
 		}
 	}
 	return;
 }
 
 void	Character::unequip( int idx ) {
+	if ( this->invalidIndex( idx ) )
+		return;
 	if( this->inventory[idx] ) {
 		this->inventory[idx] = NULL;
-	} //not delete but leak ????
+		std::cout << "Materia with index " << idx << " unequiped" << std::endl;
+	}
 	return;
 }
 
+AMateria*	Character::getAddress( int idx ) const {
+	if ( this->invalidIndex( idx ) )
+		return NULL;
+	return this->inventory[idx];
+}
+
 void	Character::use( int idx, ICharacter & target ) {
-	if ( idx < 0 || idx > 3 ) {
-		std::cout << "invalid index inventory!" << std::endl;
+	if ( this->invalidIndex( idx ) )
 		return;
-	}
 	if( this->inventory[idx] ) {
 		this->inventory[idx]->use( target );
 		delete this->inventory[idx];
+		this->inventory[idx] = NULL;
 	}
 	return;
+}
+
+bool	Character::invalidIndex( int idx ) const {
+	if ( idx < 0 || idx > 3 ) {
+		std::cout << "Invalid index inventory!" << std::endl;
+		return true;
+	}
+	if ( !this->inventory[idx] ) {
+		std::cout << "Empty index inventory!" << std::endl;
+		return true;
+	}
+	return false;
 }
 

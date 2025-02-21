@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:45:02 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/08 14:47:36 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:50:06 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ AMateria *	Cure::clone( void ) const {
 }
 
 void	Cure::use( ICharacter & target ) {
-	std::cout << "* sheals " << target.getName() << "’s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
 	return;
 }

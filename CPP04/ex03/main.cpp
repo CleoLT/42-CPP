@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:44:37 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/13 17:17:38 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:55:30 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int	main( void ) {
 	
 	const Ice*		ice1 = new Ice();
-	AMateria*	ice2 = new Ice( *ice1 );
+	AMateria*		ice2 = new Ice( *ice1 );
 	std::cout << ice1->getType() << " " << ice2->getType() << std::endl;
 	delete ice1;
 
@@ -34,20 +34,43 @@ int	main( void ) {
 
 	std::cout << std::endl;
 	
+
 	Character*	koko = new Character( "koko" );
+	koko->equip( NULL );
+	koko->equip( ice2 );
 	koko->equip( ice2 );
 	koko->equip( cure2 );
-	koko->equip( new Cure() );
-	koko->equip( new Ice() );
-	
+	koko->equip( cure2 );
+	koko->equip( ice2 );
+
 	std::cout << std::endl;
+
 
 	ICharacter*	kiki = new Character( *koko );
-	
+
 	std::cout << std::endl;
 
+
+	ICharacter*	paco = new Character( "Paco" );
+	paco->use( 2, *kiki );
+	kiki->use( 4, *paco );
+	kiki->use( 0, *paco );
+	kiki->use( 0, *paco );
+	kiki->use( 1, *paco );
+	AMateria*	tmp = kiki->getAddress( 2 );
+	kiki->unequip( 2 );
+	kiki->use( 2, *paco );
+	kiki->use( 3, *paco );
+
+	std::cout << std::endl;
+
+
+	delete tmp;
+	delete ice2;
+	delete cure2;
 	delete koko;
 	delete kiki;
+	delete paco;
 
 
 
