@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:44:37 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/21 18:55:30 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:34:26 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "Cure.hpp"
 #include "Character.hpp"
 #include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
+#include "MateriaSource.hpp"
 #include <iostream>
 
 int	main( void ) {
