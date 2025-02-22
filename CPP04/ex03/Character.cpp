@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:55:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/21 18:59:13 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:32:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ Character::Character( std::string const & str ) : name( str ) {
 }
 
 Character::Character( Character const & src ) {
-//	for( int i = 0; i < 4; i++ )
-		//	if( this->inventory[i] ) {
-		//		delete this->inventory[i];
-			//	this->inventory[i] = NULL;
-		//	}
 	*this = src;
 	std::cout << src.name << " Character copy created" << std::endl;
 	return;
@@ -55,7 +50,7 @@ Character &	Character::operator=( Character const & rhs ) {
 			this->inventory[i] = NULL;
 		for( int i = 0; i < 4; i++ )
 			if( rhs.inventory[i] )
-				this->inventory[i] = rhs.inventory[i]->clone(); //?? clone ???
+				this->inventory[i] = rhs.inventory[i]->clone();
 	}
 	std::cout << "Character assignment operator called" << std::endl;
 	return *this;
@@ -71,6 +66,7 @@ void	Character::equip( AMateria* m ) {
 	for( int i = 0; i < 4; i++ ) {
 		if ( !this->inventory[i] ) {
 			this->inventory[i] = m->clone();
+			delete m;
 			return;
 		}
 	}
