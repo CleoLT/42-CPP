@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/23 16:51:52 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:21:57 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	main( void ) {
 
 try	{
 	Bureaucrat	random = Bureaucrat();
+	Bureaucrat	random2 = Bureaucrat( random );
 
+	std::cout << random2;
 	std::cout << random;
 	random.incrementGrade();
 	std::cout << random;

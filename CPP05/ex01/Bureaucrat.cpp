@@ -6,11 +6,12 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/23 16:50:04 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:10:42 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 #include <string>
 #include <exception>
@@ -68,12 +69,21 @@ void	Bureaucrat::decrementGrade( void ) {
 	return;
 }
 
+void	Bureaucrat::signForm( Form & form ) const {
+	try {
+		form.beSigned( *this );
+	}
+	catch ( std::exception & e ) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
 const char*	Bureaucrat::GradeTooHighException::what( void ) const throw() {
 	return "Grade Too High!";
 }
 
 const char*	Bureaucrat::GradeTooLowException::what( void ) const throw() {
-	return "Grade Too Low !";
+	return "Grade Too Low!";
 }
 
 std::ostream &	operator<<( std::ostream & o, Bureaucrat const & rhs ) {
