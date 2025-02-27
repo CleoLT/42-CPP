@@ -8,6 +8,8 @@ SRCS	= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
 		  RobotomyRequestForm.cpp PresidencialPardonForm.cpp
 OBJS	= $(SRCS:.cpp=.o)
 HEADS	= $(SRCS:.cpp=.hpp)
+#hacer tests de Makefile no s'e si esto es correcto d los headers
+
 
 all:	$(NAME)
 

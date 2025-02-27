@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:29:52 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:25 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 #include <iostream>
 
 int	main( void ) {
-
+// probar los operadores de copia de los concrete form
+// probar instanciar un invalid Form, no se puede porque los grade son fijos ??
+// y no se puede instanciar un AForm()
+//pero entonces hacer manejo de errores en el ex01 si se intancia un form 
+//con grade incorrecto
 try	{
 	Bureaucrat	random = Bureaucrat();
 	AForm*		form = new ShrubberyCreationForm();
