@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:26 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:35:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:22:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ public:
 	};
 
 	class	GradeTooLowException : public std::exception {
+	public:
+		virtual const char *	what( void ) const throw();
+	};
+
+	class	IsNotSignedException : public std::exception {
+	public:
+		virtual const char *	what( void ) const throw();
+	};
+
+	class	IsAlreadySignedException : public std::exception {
 	public:
 		virtual const char *	what( void ) const throw();
 	};

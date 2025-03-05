@@ -7,8 +7,8 @@ RM		= rm -f
 SRCS	= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
 		  RobotomyRequestForm.cpp PresidencialPardonForm.cpp
 OBJS	= $(SRCS:.cpp=.o)
-HEADS	= $(SRCS:.cpp=.hpp)
-#hacer tests de Makefile no s'e si esto es correcto d los headers
+HEADS	= Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp \
+		  RobotomyRequestForm.hpp PresidencialPardonForm.hpp
 
 
 all:	$(NAME)
@@ -16,7 +16,7 @@ all:	$(NAME)
 $(NAME):	$(OBJS) 
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o:	%.cpp Makefile $(HEADS)
+%.o:	%.cpp Makefile $(HEADS)  
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

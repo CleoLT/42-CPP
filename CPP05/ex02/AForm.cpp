@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:35:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:27:41 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ int	AForm::getExecGrade( void ) const {
 
 void	AForm::beSigned( Bureaucrat const & b ) {
 	if( this->isSigned ) {
-		std::cout << "This " << this->name << " form is already signed!";
-		std::cout << std::endl;
-		return;
+		std::cout << "This " << this->name << " form ";
+		throw IsAlreadySignedException();
 	}
 	if( this->signGrade >= b.getGrade() ) {
 		this->isSigned = true;
@@ -79,13 +78,14 @@ void	AForm::beSigned( Bureaucrat const & b ) {
 		std::cout << b.getName() << " couldn't sign " << this->name;
 		std::cout << " form because ";
 		throw GradeTooLowException();
-		std::cout << std::endl;
 	}
 }
 
 void	AForm::execute( Bureaucrat const & b ) const {
-	//Check if not signed!!!!
-	/// cuidadoooooooo ne pas oublier 
+	if( !this->isSigned ) {
+		std::cout << "This " << this->name << " form ";
+		throw IsNotSignedException();
+	}
 	if( this->execGrade >= b.getGrade() ) {
 		std::cout << b.getName() << " executed " << this->name << " form";
 		std::cout << std::endl;
@@ -95,7 +95,6 @@ void	AForm::execute( Bureaucrat const & b ) const {
 		std::cout << b.getName() << " couldn't execute " << this->name;
 		std::cout << " form because ";
 		throw GradeTooLowException();
-		std::cout << std::endl;
 	}
 }
 
@@ -105,6 +104,14 @@ const char *	AForm::GradeTooLowException::what( void ) const throw() {
 
 const char *	AForm::GradeTooHighException::what( void ) const throw() {
 	return "grade too high!";
+}
+
+const char *	AForm::IsNotSignedException::what( void ) const throw() {
+	return "is not signed!";
+}
+
+const char *	AForm::IsAlreadySignedException::what( void ) const throw() {
+	return "is already signed!";
 }
 
 std::ostream &	operator<<( std::ostream & o, AForm const & form ) {

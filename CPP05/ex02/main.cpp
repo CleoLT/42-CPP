@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:44:25 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:05:42 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ catch ( std::exception & e ) {
 std::cout << std::endl;
 
 try {
-	Bureaucrat	tommy = Bureaucrat( "Tommy", 140 );
-	AForm*		proc = new ShrubberyCreationForm( "home" );
+	Bureaucrat	tommy = Bureaucrat( "Tommy", 137);
+	AForm*		proc = new ShrubberyCreationForm( );
 
 	std::cout << tommy << *proc;
+	tommy.executeForm( *proc );	
 	tommy.signForm( *proc );
 	std::cout << *proc;
 	tommy.signForm( *proc );
