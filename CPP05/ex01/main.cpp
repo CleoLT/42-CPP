@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/26 18:09:09 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:57:52 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,24 @@ catch( std::exception & e ) {
 	std::cout<< e.what() << std::endl;
 }
 
-std::cout << std::endl;;
+std::cout << std::endl;
 
 try {
 	Bureaucrat*	kiki = new Bureaucrat( "Kiki", -10 );
 	std::cout << kiki;
 }
 catch( std::exception & e ) {
-	std::cout<< e.what() << std::endl;
+	std::cout << e.what() << std::endl;
+}
+
+std::cout << std::endl;
+
+try  {
+	Form*	form = new Form( "random_name", 50, 0 );
+	std::cout << * form;
+}
+catch( std::exception & e ) {
+	std::cout << e.what() << std::endl;
 }
 
 }

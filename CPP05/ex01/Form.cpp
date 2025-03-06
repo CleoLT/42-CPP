@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/26 18:10:42 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:58:30 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,27 @@
 #include <iostream>
 #include <string>
 
-Form::Form( void ) : name( "default" ), isSigned( false ),
-					 signGrade( 50 ), execGrade( 100 ) {
+Form::Form( void )
+	: name( "default" ), isSigned( false ), signGrade( 50 ), execGrade( 100 ) {
 	return;
 }
 
-Form::Form( std::string const str, int const n1, int const n2 ) : name( str ),
-															isSigned( false ),
-															signGrade( n1 ),
-															execGrade( n2 ) {
+Form::Form( std::string const str, int const n1, int const n2 )
+	: name( str ), isSigned( false ), signGrade( n1 ), execGrade( n2 ) {
+	if ( n1 > 150 || n1 < 1 ) {
+		std::cout << "Invalid sign grade in form because ";
+		if( n1 > 150 )
+			throw GradeTooLowException();
+		else
+			throw GradeTooHighException();
+	}
+	if ( n2 > 150 || n2 < 1 ) {
+		std::cout << "Invalid execute grade in form because ";
+		if( n2 > 150 )
+			throw GradeTooLowException();
+		else
+			throw GradeTooHighException();
+	}
 	return;
 }
 		
