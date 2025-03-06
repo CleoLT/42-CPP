@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/05 18:27:41 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:41:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ AForm::AForm( void )
 AForm::AForm( std::string const str1, std::string const str2, int const n1, 
 int const n2 ) : name( str1 ), target( str2 ), isSigned( false ),
 				 signGrade( n1 ), execGrade( n2 ) {
-	//Lanzar excepciones si signGrade and execGrade no validos !!????
-	// en el ex01 TAMBIEN!!???? 
-	//y hacer los tests de iniciar forms con numeros invalidos con try catch en el main
 	return;
 }
 		

@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:29:45 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/05 18:49:36 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:24:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ ShrubberyCreationForm &	ShrubberyCreationForm::operator=
 
 void	ShrubberyCreationForm::executeSpecificForm( void ) const {
 	std::ofstream	file;
-	//const char *	name = ( this->target + "_shrubbery" ).c_str();
 	std::string		name = this->target + "_shrubbery";
 
 	file.open( name.c_str(), std::ofstream::out | std::ofstream::trunc);
