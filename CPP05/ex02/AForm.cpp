@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/06 15:41:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:54:09 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	AForm::beSigned( Bureaucrat const & b ) {
 		throw GradeTooLowException();
 	}
 }
-
-void	AForm::execute( Bureaucrat const & b ) const {
+void	AForm::checkIsSignedAndGrade( Bureaucrat const & b ) const {
 	if( !this->isSigned ) {
 		std::cout << "This " << this->name << " form ";
 		throw IsNotSignedException();
@@ -86,7 +85,6 @@ void	AForm::execute( Bureaucrat const & b ) const {
 	if( this->execGrade >= b.getGrade() ) {
 		std::cout << b.getName() << " executed " << this->name << " form";
 		std::cout << std::endl;
-		this->executeSpecificForm();
 	}
 	else if( this->execGrade < b.getGrade() ) {
 		std::cout << b.getName() << " couldn't execute " << this->name;

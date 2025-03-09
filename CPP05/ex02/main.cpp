@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:06 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/06 15:41:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:52:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ try {
 
 	std::cout << kiki << *form2;
 	kiki.executeForm( *form2 );
+//	std::cout << std::endl;
 	kiki.signForm( *form2 );
+//	std::cout << std::endl;
 	std::cout << *form2;
+//	std::cout << std::endl;
 	kiki.executeForm( *form2 );
 	kiki.executeForm( *form2 );
 	kiki.executeForm( *form2 );
@@ -74,7 +77,7 @@ catch( std::exception & e ) {
 std::cout << std::endl;;
 
 try {
-	Bureaucrat	kiki = Bureaucrat( "Kiki", 3 );
+	Bureaucrat	kiki = Bureaucrat( "Kiki", 20 );
 	AForm*		form = new PresidencialPardonForm();
 
 	std::cout << kiki << *form;

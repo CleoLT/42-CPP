@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:25:24 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:34:59 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	Bureaucrat::signForm( AForm & form ) const {
 	}
 }
 
-void	Bureaucrat::executeForm( AForm & form ) const {
+void	Bureaucrat::executeForm( AForm const & form ) const {
 	try {
 		form.execute( *this );
 	}

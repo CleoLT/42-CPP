@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:11:26 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/05 18:22:02 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:54:09 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ protected:
 	int	const			signGrade;
 	int	const			execGrade;
 
+	void	checkIsSignedAndGrade( Bureaucrat const & b ) const;
+
 public:
 	AForm( void );
 	AForm( std::string const name, std::string const target, 
@@ -41,8 +43,7 @@ public:
 	int					getExecGrade( void ) const;
 
 	void			beSigned( Bureaucrat const & bureaucrat );
-	void			execute( Bureaucrat const & executor ) const;
-	virtual void	executeSpecificForm( void ) const = 0;	
+	virtual void	execute( Bureaucrat const & executor ) const = 0;
 
 	class	GradeTooHighException : public std::exception {
 	public:

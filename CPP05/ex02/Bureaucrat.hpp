@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:40:44 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/02/27 18:25:53 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:35:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ public:
 	void	incrementGrade( void );
 	void	decrementGrade( void );
 	void	signForm( AForm & form ) const;
-	void	executeForm( AForm & form ) const;
+	void	executeForm( AForm const & form ) const;
 
 	class	GradeTooHighException : public std::exception {
 	public:

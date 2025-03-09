@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:29:45 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/05 19:24:03 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:52:25 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,29 @@ ShrubberyCreationForm &	ShrubberyCreationForm::operator=
 	return *this;
 }
 
-void	ShrubberyCreationForm::executeSpecificForm( void ) const {
-	std::ofstream	file;
-	std::string		name = this->target + "_shrubbery";
+void	ShrubberyCreationForm::execute( Bureaucrat const & b ) const {
+	try {
+		this->checkIsSignedAndGrade( b );
+	
+		std::ofstream	file;
+		std::string		name = this->target + "_shrubbery";
 
-	file.open( name.c_str(), std::ofstream::out | std::ofstream::trunc);
-	file << "       /\\" << std::endl;
-	file <<	"      /  \\" << std::endl;
-	file << "     /    \\" << std::endl;
-	file <<	"    /      \\" << std::endl;
-	file << "   /        \\" << std::endl;
-	file <<	"  /          \\" << std::endl;
-	file << " /            \\" << std::endl;
-	file <<	"/              \\" << std::endl;
-	file <<	"- - - - - - - - -" << std::endl;
-	file << "       ||" << std::endl;
-	file << "       ||" << std::endl;
-	file.close();
+		file.open( name.c_str(), std::ofstream::out | std::ofstream::trunc);
+		file << "       /\\" << std::endl;
+		file <<	"      /  \\" << std::endl;
+		file << "     /    \\" << std::endl;
+		file <<	"    /      \\" << std::endl;
+		file << "   /        \\" << std::endl;
+		file <<	"  /          \\" << std::endl;
+		file << " /            \\" << std::endl;
+		file <<	"/              \\" << std::endl;
+		file <<	"- - - - - - - - -" << std::endl;
+		file << "       ||" << std::endl;
+		file << "       ||" << std::endl;
+		file.close();
+	}
+	catch ( std::exception & e ) {
+		std::cout << e.what() << std::endl;
+	}
 }
 
