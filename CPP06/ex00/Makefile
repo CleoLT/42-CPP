@@ -1,4 +1,4 @@
-NAME	= scalarconverter
+NAME	= convert
 
 CC		= c++ 
 CFLAGS	= -Wextra -Wall -Werror -std=c++98
@@ -10,10 +10,10 @@ OBJS	= $(SRCS:.cpp=.o)
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -c $< -o $@
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJS):	Makefile ScalarConverter.hpp
-		$(CC) $(CFLAGS) $(OBJS) -c $(NAME)
+%.o:	%.cpp Makefile ScalarConverter.hpp
+		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		$(RM) $(OBJS)
