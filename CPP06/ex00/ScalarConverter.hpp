@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 12:45:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/13 18:05:14 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:25:33 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <exception>
 
 enum	e_type {
-	INVALID	= 0,
+//	INVALID	= 0,
 	CHAR	= 1,
 	INT		= 2,
 	FLOAT	= 3,
@@ -26,12 +26,8 @@ enum	e_type {
 
 class	ScalarConverter {
 private:	
-				ScalarConverter( void );
-//	explicit	ScalarConverter( char c );
-//	explicit	ScalarConverter( int i );
-//	explicit	ScalarConverter( float f );
-//	explicit	ScalarConverter( double d );
-				ScalarConverter( ScalarConverter const & src );
+	ScalarConverter( void );
+	ScalarConverter( ScalarConverter const & src );
 	~ScalarConverter( void );
 
 	ScalarConverter &	operator=( ScalarConverter const & rhs );
