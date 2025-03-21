@@ -4,7 +4,7 @@ CC		= c++
 CFLAGS	= -Wextra -Wall -Werror -std=c++98
 RM		= rm -f 
 
-SRCS	= main.cpp ScalarConverter.cpp
+SRCS	= main.cpp ScalarConverter.cpp converters.cpp printers.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all:	$(NAME)
