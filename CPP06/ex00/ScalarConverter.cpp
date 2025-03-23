@@ -6,16 +6,14 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 12:59:16 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/21 13:08:44 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:15:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <string>
-//#include <sstream>
 #include <exception>
-//#include <limits>
 
 ScalarConverter::ScalarConverter( void ) {}
 
@@ -33,7 +31,6 @@ ScalarConverter &	ScalarConverter::operator=( ScalarConverter const & rhs ) {
 void	ScalarConverter::convert( std::string const & input ) {
 	try {
 		e_type	type = parsing( input );
-		//std::cout << "Type: " << type << std::endl;
 		switch ( type ) {
 			case CHAR:
 				toChar( input );	
@@ -47,8 +44,8 @@ void	ScalarConverter::convert( std::string const & input ) {
 			case DOUBLE:
 				toDouble( input );
 				break;
-			default:
-				return;
+			case SPECIAL:
+				printSpecial( input );
 		}
 	}
 	catch( std::exception &e ) {

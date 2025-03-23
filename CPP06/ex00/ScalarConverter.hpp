@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 12:45:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/03/21 14:48:27 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:54:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <exception>
 
 enum	e_type {
-//	INVALID	= 0,
+	SPECIAL	= 0,
 	CHAR	= 1,
 	INT		= 2,
 	FLOAT	= 3,
@@ -43,13 +43,16 @@ public:
 };
 
 e_type	parsing( std::string const & input );
+
 void	toChar( std::string const & input );
 void	toInt( std::string const & input );
 void	toFloat( std::string const & input );
 void	toDouble( std::string const & input );
-void	printChar( char const c, double const value);
-void	printInt( int const i, double const value);
-void	printFloat( float const f, double const value );
-void	printDouble( double const d );
+
+void	printSpecial( std::string const & input );
+void	printChar( char const c, double const value );
+void	printInt( int const i, double const value );
+void	printFloat( float const f, std::string const & input );
+void	printDouble( double const d, std::string const & input );
 
 #endif
