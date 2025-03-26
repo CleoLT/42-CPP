@@ -12,13 +12,13 @@ all:	$(NAME)
 $(NAME): $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
-%.o: %.cpp Serializer.hpp Makefile
+%.o: %.cpp Serializer.hpp Data.hpp Makefile
 		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		$(RM) $(OBJS)
 
-flcean: clean
+fclean:	clean
 		$(RM) $(NAME)
 
 re: fclean all
