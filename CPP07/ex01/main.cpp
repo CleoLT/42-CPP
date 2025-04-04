@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:30:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/04 14:20:58 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:34:54 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main() {
 	std::cout << std::endl << std::endl;
 
 
-	//tests con otros tipos de array!!!
 	std::string	str[] = { "soy", "un", "array", "de", "strings", "" };
 
 	::iter( str, sizeof(str) / sizeof(str[0]), print<std::string> );
