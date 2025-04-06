@@ -4,7 +4,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -f
 
-SRCS	= main.cpp Array.tpp
+SRCS	= main.cpp 
 OBJS	= $(SRCS:.cpp=.o)
 
 
@@ -13,7 +13,7 @@ all:	$(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.cpp Makefile Array.hpp
+%.o:%.cpp Makefile Array.hpp Array.tpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
