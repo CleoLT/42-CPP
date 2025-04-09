@@ -6,8 +6,14 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:48:05 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/06 16:48:10 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:42:17 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SPAN_HPP
+#define SPAN_HPP
 
+
+class	Span {
+ private:
+  

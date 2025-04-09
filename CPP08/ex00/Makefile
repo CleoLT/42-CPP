@@ -1,25 +1,25 @@
-NAME	= spand
+NAME	= easyfind
 
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -f
 
-SRCS	= main.cpp Span.cpp
+SRCS	= main.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.cpp Makefile Span.hpp
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o:%.cpp Makefile easyfind.hpp
+		$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
-	$(RM) $(OBJS)
+clean: 
+		$(RM) $(OBJS)
 
-fclean:	clean
-	$(RM) $(NAME)
+fclean: clean
+		$(RM) $(NAME)
 
 re: fclean all
 
