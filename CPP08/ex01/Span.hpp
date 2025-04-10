@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:48:05 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/09 20:00:01 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:44:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	Span &	operator=( Span const & rhs );
 	
 	void	addNumber( int i );
-	void	addNumber();
+	void	addNumber( std::vector<int> const & v );
 	void	printContent()	const;
 	int		shortestSpan()	const;
 	int		longestSpan()	const;
@@ -41,11 +41,6 @@ public:
 	};
 
 	class	EmptyException : public std::exception {
-	public:
-		virtual const char *	what() const throw();
-	};
-
-	class	InvalidIndex : public std::exception {
 	public:
 		virtual const char *	what() const throw();
 	};
