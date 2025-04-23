@@ -6,18 +6,29 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:24 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/21 12:20:37 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:00:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
+#include <fstream>
 
 int	main( int argc, char **argv ) {
 	if ( argc != 2 ) {
 		std::cerr << "Error: could not open file." << std::endl;
 		return 1;
 	}
-	std::cout << argv[1] << std::endl;
+	
+	BitcoinExchange	btc;
+	std::fstream	fs( argv[1], std::fstream::in ); // open and close automatical in this scope
+
+	if ( !fs.is_open() ) {
+		std::cerr << "Error: could not open file" << std::endl;
+		return 2;
+	}
+	
+	btc.printExchangedValues( fs );
+
 	return 0;
 }
