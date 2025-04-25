@@ -6,13 +6,14 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:24 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/23 17:00:03 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:29:46 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
 #include <fstream>
+//#include <exception>
 
 int	main( int argc, char **argv ) {
 	if ( argc != 2 ) {
@@ -27,8 +28,11 @@ int	main( int argc, char **argv ) {
 		std::cerr << "Error: could not open file" << std::endl;
 		return 2;
 	}
-	
-	btc.printExchangedValues( fs );
 
+//	try {	
+		btc.printExchangedValues( fs );
+//	} catch( std::exception &e ) {
+//		std::cout << "Error: " << e.what() << std::endl;
+//	}
 	return 0;
 }
