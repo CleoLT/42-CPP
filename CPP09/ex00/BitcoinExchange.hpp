@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:29 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/25 17:05:44 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:32:14 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 #include <string>
 #include <map>
 #include <exception>
+#include <ctime>
 
 class	BitcoinExchange {
 private:
-	std::map<std::string, int>	db;
-	std::map<int, float>		input;
+	std::map<time_t, float>	db;
+//	std::map<int, float>		input;
 
-	void	parseAndPrintLine( std::string l ) const;
+	void	parseLine( std::string const & l , time_t * date ) const;
+	void	printLine( std::string const & l ) const;
 
 public:
 	BitcoinExchange();
@@ -37,6 +39,7 @@ public:
 	class	BadInputException : public std::exception {
 	private:
 		std::string	arg;
+	
 	public:
 		BadInputException( std::string const & arg );
 		virtual	~BadInputException() throw();
@@ -48,6 +51,13 @@ public:
 		virtual const char *	what() const throw();
 	};
 
+	class	TooLargeNumberException : public std::exception {
+	public:
+		virtual const char *	what() const throw();
+	};
 };
+
+bool	invalidDate( std::string const & d, time_t * date);
+bool	invalidFloat( std::string const & f );
 
 #endif
