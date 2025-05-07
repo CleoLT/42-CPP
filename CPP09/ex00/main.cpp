@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:24 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/07 15:15:09 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:52:36 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main( int argc, char **argv ) {
 			std::cerr << "Error: could not open file" << std::endl;
 			return 2;
 		}
+	//	btc.printDataBase();
 		btc.printExchangedValues( fs );
 	} catch( std::exception &e ) {
 		std::cout << "Error: " << e.what() << std::endl;

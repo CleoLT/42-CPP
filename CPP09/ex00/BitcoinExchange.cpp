@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:36 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/07 15:43:10 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:17:39 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,20 @@ BitcoinExchange::BitcoinExchange( char const * filename ) {
 
 	char		line[256];
 	time_t		date;
-	std::string	v;
-//	std::map<time_t, float>::iterator	it = db.begin();
-//	std::map<time_t, float>::iterator	ite = db.end();
-//	for ( it = db.begin(); it != ite; ++it ) {
-//		}
+	int			i = 0;
+	
 	while ( !fs.eof() ) {
 		fs.getline( line, 256 );
 		std::string	l( line );
-		date = 0;
-		v.clear();
-		v = l.substr( 12, l.length() -1 );
-		if ( l.empty() || l.length() < 12 || invalidDate( l.substr( 0, 10 ), &date ) || l.at( 11 ) != ',' \
-			|| invalidFloat( v ))
+		if ( i == 0 && l == "date,exchange_rate" )
 			continue;
-		db[ date ] = atof( v.c_str());
+		date = 0;
+		if ( l.empty() || l.length() < 12 || invalidDate( l.substr( 0, 10 ), &date ) || l.at( 10 ) != ',' \
+			|| invalidFloat( l.substr( 11, l.length() -1 )))
+			continue;
+		db[ date ] = atof( l.substr( 11, l.length() -1).c_str() );
+		i++;
+		l.clear();
 	}
 }
 
@@ -55,10 +54,17 @@ BitcoinExchange &	BitcoinExchange::operator=( BitcoinExchange const & rhs ) {
 	return *this;
 }
 
+void	BitcoinExchange::printDataBase() {
+	std::map<time_t, float>::iterator	it;
+	std::map<time_t, float>::iterator	ite = this->db.end();
+
+	for ( it = this->db.begin(); it != ite; ++it ) 
+		std::cout << it->first << " " << it->second << std::endl;
+}
+
 void	BitcoinExchange::printExchangedValues( std::fstream & file ) const {
 	
 	char		line[256];
-//	std::string	l;
 	int			i = 0;
 	time_t		date;
 
@@ -72,7 +78,7 @@ void	BitcoinExchange::printExchangedValues( std::fstream & file ) const {
 		try {
 			date = 0;
 			parseLine( l, &date );
-			printLine( l );
+			printLine( l, date );
 		} catch( std::exception &e ) {
 			std::cout << "Error: " << e.what() << std::endl;
 		}
@@ -90,7 +96,7 @@ void	BitcoinExchange::parseLine( std::string const & l, time_t * date ) const {
 		throw InvalidDateException( l.substr( 0, 10 ) );
 }
 
-void	BitcoinExchange::printLine( std::string const & l ) const {
+void	BitcoinExchange::printLine( std::string const & l, time_t date ) const {
 	
 	std::string	year( l.substr( 0 , 4 ));
 	std::string	month( l.substr( 5, 2 ));
@@ -104,11 +110,12 @@ void	BitcoinExchange::printLine( std::string const & l ) const {
 	if ( value >= 1000 )
 		throw TooLargeNumberException();
 
-
-	std::cout << year << "-" << month << "-" << day << " => " << value << " = " << std::endl;
+	std::map<time_t, float>::const_iterator	it = this->db.lower_bound( date );
+	if ( it->first > date )
+		it--;
+	std::cout << year << "-" << month << "-" << day << " => " << value << " = " << value * it->second << std::endl;
+	
 }
-
-
 
 BitcoinExchange::BadInputException::BadInputException( std::string const & arg ) : arg( arg ) {}
 

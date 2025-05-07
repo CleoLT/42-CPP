@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:29 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/07 15:12:16 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:17:39 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 class	BitcoinExchange {
 private:
 	std::map<time_t, float>	db;
-//	std::map<int, float>		input;
 
-	void	parseLine( std::string const & l , time_t * date ) const;
-	void	printLine( std::string const & l ) const;
+	void	parseLine( std::string const & l, time_t * date ) const;
+	void	printLine( std::string const & l, time_t date) const;
 	BitcoinExchange();
 
 public:
@@ -35,6 +34,7 @@ public:
 	BitcoinExchange &	operator=( BitcoinExchange const & rhs );
 	
 	void	printExchangedValues( std::fstream & file ) const;
+	void	printDataBase();
 
 	class	BadInputException : public std::exception {
 	private:
