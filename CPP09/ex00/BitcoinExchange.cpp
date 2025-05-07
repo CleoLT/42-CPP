@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:36 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/27 18:11:42 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:43:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,30 @@
 #include <exception>
 #include <string>
 
-BitcoinExchange::BitcoinExchange() {}
+BitcoinExchange::BitcoinExchange( char const * filename ) {
+	std::fstream	fs( filename, std::fstream::in );
+	if ( !fs.is_open() ) 
+		throw InvalidFileException();
+
+	char		line[256];
+	time_t		date;
+	std::string	v;
+//	std::map<time_t, float>::iterator	it = db.begin();
+//	std::map<time_t, float>::iterator	ite = db.end();
+//	for ( it = db.begin(); it != ite; ++it ) {
+//		}
+	while ( !fs.eof() ) {
+		fs.getline( line, 256 );
+		std::string	l( line );
+		date = 0;
+		v.clear();
+		v = l.substr( 12, l.length() -1 );
+		if ( l.empty() || l.length() < 12 || invalidDate( l.substr( 0, 10 ), &date ) || l.at( 11 ) != ',' \
+			|| invalidFloat( v ))
+			continue;
+		db[ date ] = atof( v.c_str());
+	}
+}
 
 BitcoinExchange::BitcoinExchange( BitcoinExchange const & src ) { 
 	*this = src;
@@ -61,10 +84,10 @@ void	BitcoinExchange::printExchangedValues( std::fstream & file ) const {
 void	BitcoinExchange::parseLine( std::string const & l, time_t * date ) const {
 	if ( l.length() < 13 || l.at(10) != ' ' || l.at(11) != '|' || l.at(12) != ' ' )
 		throw BadInputException( l );
-	if ( invalidDate( l.substr( 0, 10 ), date))
-		throw BadInputException( l );
 	if ( invalidFloat( l.substr( 13, l.length() -1 )))
 		throw BadInputException( l );
+	if ( invalidDate( l.substr( 0, 10 ), date))
+		throw InvalidDateException( l.substr( 0, 10 ) );
 }
 
 void	BitcoinExchange::printLine( std::string const & l ) const {
@@ -82,7 +105,7 @@ void	BitcoinExchange::printLine( std::string const & l ) const {
 		throw TooLargeNumberException();
 
 
-	std::cout << year << "-" << month << "-" << day << " => " << value << std::endl;
+	std::cout << year << "-" << month << "-" << day << " => " << value << " = " << std::endl;
 }
 
 
@@ -96,10 +119,23 @@ const char *	BitcoinExchange::BadInputException::what() const throw() {
 	return  this->arg.c_str();
 }
 
+BitcoinExchange::InvalidDateException::InvalidDateException( std::string const & arg ) : arg( arg ) {}
+
+BitcoinExchange::InvalidDateException::~InvalidDateException() throw() {}
+
+const char *	BitcoinExchange::InvalidDateException::what() const throw() {
+	std::cout << "invalid date  => ";
+	return  this->arg.c_str();
+}
+
 const char *	BitcoinExchange::NotPositiveNumberException::what() const throw() {
 	return "not a positive number.";
 }
 
 const char *	BitcoinExchange::TooLargeNumberException::what() const throw() {
 	return "too large number.";
+}
+
+const char *	BitcoinExchange::InvalidFileException::what() const throw() {
+	return "cannot open file.";
 }

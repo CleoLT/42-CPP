@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:06:29 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/04/27 17:32:14 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:12:16 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ private:
 
 	void	parseLine( std::string const & l , time_t * date ) const;
 	void	printLine( std::string const & l ) const;
+	BitcoinExchange();
 
 public:
-	BitcoinExchange();
-//	BitcoinExchange( std::string const & filename );
+	BitcoinExchange( char const * filename );
 	BitcoinExchange( BitcoinExchange const & src );
 	~BitcoinExchange();
 
@@ -46,6 +46,17 @@ public:
 		virtual const char *	what() const throw();
 	};
 
+	class	InvalidDateException : public std::exception {
+	private:
+		std::string	arg;
+	
+	public:
+		InvalidDateException( std::string const & arg );
+		virtual	~InvalidDateException() throw();
+		virtual const char *	what() const throw();
+	};
+
+
 	class	NotPositiveNumberException : public std::exception {
 	public:
 		virtual const char *	what() const throw();
@@ -55,6 +66,12 @@ public:
 	public:
 		virtual const char *	what() const throw();
 	};
+
+	class	InvalidFileException : public std::exception {
+	public:
+		virtual const char *	what() const throw();
+	};
+
 };
 
 bool	invalidDate( std::string const & d, time_t * date);
