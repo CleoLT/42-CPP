@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:10:48 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/09 17:21:18 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:48:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,23 @@ bool	parse( std::string const & arg ) {
 			i++;
 			continue;
 		}
-		if ( isdigit( s.at( i ) ) && s.at( i + 1 ) && s.at( i + 1 ) != ' ' )
+		if ( isdigit( s.at( i )) && s[ i + 1 ] && s.at( i + 1 ) != ' ' )
 			return true;
-		if ( s.at( i ) == '+' || s.at( i ) == '-' || s.at( i ) == '*' || s.at( i ) == '/' )
-			if ( s.at( i + 1 ) && s.at( i + 1 ) != ' ' )
-				return true;
+		if (  s.at( i ) == '+' || s.at( i ) == '-' )
+			if ( s[ i + 1 ] && isdigit( s.at( i + 1 ))) {
+				i++;
+				continue;
+			}
+		if ( s.at( i ) == '+' || s.at( i ) == '-' || s.at( i ) == '*' || s.at( i ) == '/' ) {
+			if ( s[ i + 1 ] && s.at( i + 1 ) == ' ' ) {
+				i++;
+				continue;
+			}
+			else if ( !s[ i + 1 ] )
+				return false;
+		}
+		if ( !isdigit( s.at( i ))  )
+			return true;
 		i++;
 	}
 
@@ -47,9 +59,13 @@ int	main( int argc, char ** argv ) {
 
 
 	if ( parse( argv[1] ) ){
-		std::cerr << "Error: wrong argument!" << std::endl;
+		std::cerr << "Error: wrong argument syntaxis!" << std::endl;
 		return 1;
 	}
+
+	RPN	rpn( argv[1] );
+
+
 
 	return 0;
 }
