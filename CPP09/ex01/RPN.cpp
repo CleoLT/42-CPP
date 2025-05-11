@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:11:01 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/11 16:59:49 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:56:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stack>
 #include <iterator>
 #include <iostream>
+#include <cstdlib>
 
 RPN::RPN( std::string const & s ) { 
 	parse( s ); 
@@ -62,4 +63,24 @@ void	RPN::parse( std::string const & str ) {
 			this->in.push( s.substr( i, 1 ));
 		i++;		
 	}
+}
+
+int	RPN::output() {
+
+	while ( !this->in.empty() ) {
+		if ( this->in.top() == "0" || this->in.top() == "+0" || this->in.top() == "-0" ) {
+			this->out.push( 0 );
+			this->in.pop();
+			continue;
+		}
+		if ( atoi( this->in.top().c_str() ) != 0 ) {
+			this->out.push( atoi( this->in.top().c_str()));
+			this->in.pop();
+			continue;
+		}
+		break;
+	}
+	printStack( this->in );
+	printStack( this->out );
+	return this->out.top();
 }
