@@ -6,24 +6,19 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:10:55 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/14 19:13:19 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:13:18 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 #define RPN_HPP
 
-#define ADD			1
-#define SUBSTRACT	2
-#define MULTIPLY	3
-#define DIVIDE		4
-
 #include <string>
 #include <stack>
 #include <iterator>
 #include <iostream>
 
-enum	Operator {
+enum	Operators {
 	ADD,
 	SUBSTRACT,
 	MULTIPLY,
@@ -35,9 +30,12 @@ private:
 	std::stack<std::string>	in;
 	std::stack<int>			out;
 	
+	
 	RPN();
 
 	void	parse( std::string const & s );
+	int		whichOperator() const;
+	void	makeCalculation();
 
 	template<typename T>
 	void	printStack( std::stack<T> const & st ) const;
@@ -50,6 +48,21 @@ public:
 	RPN &	operator=( RPN const & rhs );
 
 	int		output();
+
+	class	TooManyNumbersException: public std::exception {
+	public:
+		virtual const char *	what() const throw();
+	};
+
+	class	CannotDivideBy0Exception: public std::exception {
+	public:
+		virtual const char *	what() const throw();
+	};
+	
+	class	NotEnoughNumbersException: public std::exception {
+	public:
+		virtual const char *	what() const throw();
+	};
 };
 
 template<typename T>

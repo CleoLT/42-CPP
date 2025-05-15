@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:10:48 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/14 18:47:52 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:45:37 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ int	main( int argc, char ** argv ) {
 
 	RPN	rpn( argv[1] );
 	
-	std::cout << rpn.output() << std::endl;
-
+	try {
+		std::cout << rpn.output() << std::endl;
+	} catch ( std::exception & e ) {
+		std::cout << e.what() << std::endl;
+	}
 
 	return 0;
 }

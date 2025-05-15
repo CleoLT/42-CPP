@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:11:01 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/14 19:13:19 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:16:18 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,43 @@ void	RPN::parse( std::string const & str ) {
 	}
 }
 
-void	RPN::makeCalcul() {
-				
+int	RPN::whichOperator() const {
+	std::string	operators[4] = {"+", "-", "*", "/"};
+
+	for ( int i = 0; i < 4; i++ )
+		if ( this->in.top() == operators[i] )
+			return i;
+	return -1;
+}
+
+
+void	RPN::makeCalculation() {
+	int	tmp = this->out.top();
+	
+	this->out.pop();
+	if ( this->out.empty() )
+		throw NotEnoughNumbersException();
+
+	switch ( whichOperator()) {
+		case ADD:
+			this->out.top() += tmp;
+			break;
+		case SUBSTRACT:
+			this->out.top() -= tmp; 
+			break;
+		case MULTIPLY:
+			this->out.top() *= tmp;
+			break;
+		case DIVIDE:
+			if ( tmp == 0 )
+				throw CannotDivideBy0Exception();
+			this->out.top() /= tmp; 
+			break;
+		default:
+			std::cout << "Error: invalid operator!" << std::endl;
+	}
+	this->in.pop();
+}
 
 int	RPN::output() {
 
@@ -70,27 +105,32 @@ int	RPN::output() {
 		if ( this->in.top() == "0" || this->in.top() == "+0" || this->in.top() == "-0" ) {
 			this->out.push( 0 );
 			this->in.pop();
-		//	continue;
 		}
 		else if ( atoi( this->in.top().c_str() ) != 0 ) {
 			this->out.push( atoi( this->in.top().c_str()));
-			std::cout << "|";
 			this->in.pop();
-		//	continue;
 		}
 		else {
-			try {
-				switch ( whichOperator()) {
-					case ADD:
-						makeCalcul( ADD ) 
-			catch ( std::exception & e )
-				std::cout << e.what() <<std::endl;
+			makeCalculation( ); 
 		}
-	//	break;
 	}
+	
+	int result = this->out.top();
+	
+	this->out.pop();
+	if ( !this->out.empty())
+		throw TooManyNumbersException();
+	return result;
+}
 
-	std::cout << std::endl;
-	printStack( this->in );
-	printStack( this->out );
-	return this->out.top();
+const char *	RPN::TooManyNumbersException::what() const throw() {
+	return "Error: The calculation cannot be done, you have entered too many numbers into the expression!";
+}
+
+const char *	RPN::CannotDivideBy0Exception::what() const throw() {
+	return "Error: The calculation cannot be done, you cannot divide by 0!";
+}
+
+const char *	RPN::NotEnoughNumbersException::what() const throw() {
+	return "Error: The calculation cannot be done, there are not enough numbers in the expression!";
 }
