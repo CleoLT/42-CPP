@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/24 16:28:54 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:00:28 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ private:
 	std::vector<std::string>	param;
 	std::vector<int>			before;
 	std::vector<int>			after;
+	std::vector<int *> 			pair;
+	int							n;
 	
 	void	parse();
 	
 	template<typename T>
 	void	printVector( std::vector<T> const & v ) const;
+	void	printPair( std::vector<int *> const & v ) const;
 
 	PmergeMe();
 

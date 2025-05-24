@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/24 17:01:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:10:15 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 PmergeMe::PmergeMe( char **argv ) {
 	for ( int i = 1; argv[i]; i++ )
 		param.push_back( argv[i] );
-	printVector( param );
+	n = param.size();
+//	printVector( param );
 	parse();
 }
 
@@ -35,6 +36,31 @@ PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 		this->after = std::vector<int>( rhs.after );
 	}
 	return *this;
+}
+
+void	PmergeMe::sort() {
+	std::vector<int>::iterator	it;
+	std::vector<int>::iterator	ite = this->before.end();
+	std::vector<int *>::iterator		p_it;
+	std::vector<int *>::iterator		p_ite; // = this->before.end();
+//	int									i[2];
+
+	std::cout << "n: " << this->n << std::endl;
+
+	for ( it = this->before.begin(); it != ite; ++it ) {
+		
+		int *	i = new int[ 2 ];
+		i[ 0 ] = *it;
+		if ( it == ite )
+			break;
+		it++;
+		i[ 1 ] = *it;
+		pair.push_back( i );
+	}
+
+	printPair( pair );
+
+
 }
 
 void	PmergeMe::parse() {
@@ -61,8 +87,21 @@ void	PmergeMe::parse() {
 		}
 		this->before.push_back( tmp );
 	}
+	std::cout << "Before: ";
 	printVector( before );
 }
+
+void	PmergeMe::printPair( std::vector<int *> const & v ) const {
+	std::vector<int *>					tmp( v );
+
+	std::vector<int *>::const_iterator	it;
+	std::vector<int *>::const_iterator	ite = tmp.end();
+
+	for ( it = tmp.begin(); it != ite; ++it )
+		std::cout << (*it)[0] << " " << (*it)[1] << " | ";
+	std::cout << std::endl;
+}
+
 
 const char *	PmergeMe::WrongSyntaxisException::what() const throw() {
 	return "wrong syntaxis, try again!";
