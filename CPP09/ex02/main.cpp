@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/24 15:45:00 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:40:20 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int main( int argc, char * argv[] ) {
 
 	try {
 		PmergeMe	algo( argv );
+		PmergeMe	cpy( algo );
 	} catch ( std::exception & e ) {
 		std::cout << "Error: " << e.what() << std::endl;
 	}
-
-
+	
 	return 0;
 }
 		
