@@ -4,7 +4,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 RM		= rm -f
 
-SRCS	= main.cpp PmergeMe.cpp
+SRCS	= main.cpp PmergeMe.cpp utils.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all:	$(NAME)

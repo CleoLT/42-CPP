@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/24 18:10:15 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/25 17:22:59 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 PmergeMe::PmergeMe( char **argv ) {
 	for ( int i = 1; argv[i]; i++ )
 		param.push_back( argv[i] );
-	n = param.size();
+//	n = param.size();
+//	odd = 0;
 //	printVector( param );
 	parse();
 }
@@ -38,30 +40,49 @@ PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 	return *this;
 }
 
+
 void	PmergeMe::sort() {
-	std::vector<int>::iterator	it;
-	std::vector<int>::iterator	ite = this->before.end();
-	std::vector<int *>::iterator		p_it;
-	std::vector<int *>::iterator		p_ite; // = this->before.end();
-//	int									i[2];
+	mergeInsertionSort( this->before );
 
-	std::cout << "n: " << this->n << std::endl;
+	std::cout << "After: ";
+	printVector( this->before );
+	
+}
 
-	for ( it = this->before.begin(); it != ite; ++it ) {
-		
-		int *	i = new int[ 2 ];
-		i[ 0 ] = *it;
-		if ( it == ite )
-			break;
-		it++;
-		i[ 1 ] = *it;
-		pair.push_back( i );
+void	PmergeMe::mergeInsertionSort( std::vector<int> & v ) {
+	int	n = v.size();
+	if ( n <= 1 ) return;
+
+	std::vector<int>	a;
+	std::vector<int>	b;
+
+	for ( int i = 0; i + 1 < n; i +=2 ) {		//dividir por pares, y ordenar a > b en la par
+		if ( v[i] > v[i + 1] ) {
+			a.push_back( v[i] );
+			b.push_back( v[i + 1] );
+		} else {
+			a.push_back( v[i + 1] );
+			b.push_back( v[i] );
+		}
 	}
 
-	printPair( pair );
+	if ( n % 2 != 0 ) a.push_back( v[n - 1] );	// si n impar
+		
+	mergeInsertionSort( a );					//ordenar a recursivamente : merge insertion
+	
+	std::vector<int>	t;						//calcular t sequence
+	while( t.size() < b.size()) 
+		t.push_back( tEquation( t.size() ));
 
-
-}
+	std::vector<int>	main_chain( a );
+	main_chain.insert( main_chain.begin(), b[0] );
+	int					b_size = b.size();		//ordenar los b en el orden inverso de t_sequence
+	for ( int i = t.size() -1; i > 0; --i )		
+		for( int j = std::min( t[i], b_size ) - 1; j >= t[i - 1]; --j )
+			binaryInsertion( main_chain, b[j] );
+	
+	v = main_chain;
+} 
 
 void	PmergeMe::parse() {
 	std::vector<std::string>::const_iterator	it;
@@ -91,14 +112,15 @@ void	PmergeMe::parse() {
 	printVector( before );
 }
 
-void	PmergeMe::printPair( std::vector<int *> const & v ) const {
-	std::vector<int *>					tmp( v );
-
-	std::vector<int *>::const_iterator	it;
-	std::vector<int *>::const_iterator	ite = tmp.end();
+void	PmergeMe::printPair( std::vector< std::pair<int, int> > const & v ) const {
+	std::vector< std::pair<int, int> >					tmp( v );
+	std::vector< std::pair<int, int> >::const_iterator	it;
+	std::vector< std::pair<int, int> >::const_iterator	ite = tmp.end();
 
 	for ( it = tmp.begin(); it != ite; ++it )
-		std::cout << (*it)[0] << " " << (*it)[1] << " | ";
+		std::cout << (*it).first << " " << (*it).second << " | ";
+	if ( this->odd )
+		std::cout << this->odd;
 	std::cout << std::endl;
 }
 
