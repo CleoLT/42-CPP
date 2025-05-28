@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/25 17:22:59 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:51:55 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 PmergeMe::PmergeMe( char **argv ) {
 	for ( int i = 1; argv[i]; i++ )
 		param.push_back( argv[i] );
-//	n = param.size();
-//	odd = 0;
-//	printVector( param );
 	parse();
 }
 
@@ -34,53 +31,57 @@ PmergeMe::~PmergeMe() {}
 
 PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 	if ( this != &rhs ) {
-		this->before = std::vector<int>( rhs.before );
-		this->after = std::vector<int>( rhs.after );
+		this->vec = std::vector<int>( rhs.vec );
+		this->list = std::list<int>( rhs.list );
 	}
 	return *this;
 }
 
 
 void	PmergeMe::sort() {
-	mergeInsertionSort( this->before );
+	mergeInsertionVec( this->vec );
 
-	std::cout << "After: ";
-	printVector( this->before );
+	std::cout << "After:	";
+	printVector( this->vec );
 	
 }
 
-void	PmergeMe::mergeInsertionSort( std::vector<int> & v ) {
+void	PmergeMe::mergeInsertionVec( std::vector<int> & v ) {
 	int	n = v.size();
 	if ( n <= 1 ) return;
 
 	std::vector<int>	a;
 	std::vector<int>	b;
 
-	for ( int i = 0; i + 1 < n; i +=2 ) {		//dividir por pares, y ordenar a > b en la par
-		if ( v[i] > v[i + 1] ) {
-			a.push_back( v[i] );
-			b.push_back( v[i + 1] );
-		} else {
-			a.push_back( v[i + 1] );
-			b.push_back( v[i] );
-		}
-	}
-
-	if ( n % 2 != 0 ) a.push_back( v[n - 1] );	// si n impar
+	makePairs( a, b, v );						//dividir por pares, y ordenar a > b en la par
+	
+	if ( n % 2 != 0 ) a.push_back( v[n - 1] );
 		
-	mergeInsertionSort( a );					//ordenar a recursivamente : merge insertion
+	mergeInsertionVec( a );					//ordenar a recursivamente : merge insertion
 	
 	std::vector<int>	t;						//calcular t sequence
-	while( t.size() < b.size()) 
-		t.push_back( tEquation( t.size() ));
-
-	std::vector<int>	main_chain( a );
-	main_chain.insert( main_chain.begin(), b[0] );
-	int					b_size = b.size();		//ordenar los b en el orden inverso de t_sequence
-	for ( int i = t.size() -1; i > 0; --i )		
-		for( int j = std::min( t[i], b_size ) - 1; j >= t[i - 1]; --j )
-			binaryInsertion( main_chain, b[j] );
+	int					i = 0;
 	
+	while (true) {
+		int next = tEquation( i );
+		if ( next >= (int)b.size())
+			break;
+		t.push_back( next );
+		++i;
+	}
+	
+	std::vector<int>	main_chain( a );
+
+	binaryInsertion( main_chain, b[0] );
+	
+	for ( int i = t.size() - 1; i > 0; --i ) 		// insertar los b en bloques de t, en el orden inverso de t_sequence
+		for( int j = std::min( t[i], (int)b.size()) - 1; j >= t[i - 1]; --j ) 
+			binaryInsertion( main_chain, b[j] );
+
+	//Insertar elementos restantes de b que no fueron cubiertos por los bloques de t
+	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j )
+		binaryInsertion(main_chain, b[j]);
+
 	v = main_chain;
 } 
 
@@ -106,24 +107,14 @@ void	PmergeMe::parse() {
 			if ( !isdigit( *s_it ))
 				throw WrongSyntaxisException();
 		}
-		this->before.push_back( tmp );
+		this->vec.push_back( tmp );
+		this->list.push_back( tmp );
 	}
-	std::cout << "Before: ";
-	printVector( before );
+	std::cout << "Before:	";
+	printVector( this->vec );
+	std::cout << "Before:	";
+//	printVector( this->list );
 }
-
-void	PmergeMe::printPair( std::vector< std::pair<int, int> > const & v ) const {
-	std::vector< std::pair<int, int> >					tmp( v );
-	std::vector< std::pair<int, int> >::const_iterator	it;
-	std::vector< std::pair<int, int> >::const_iterator	ite = tmp.end();
-
-	for ( it = tmp.begin(); it != ite; ++it )
-		std::cout << (*it).first << " " << (*it).second << " | ";
-	if ( this->odd )
-		std::cout << this->odd;
-	std::cout << std::endl;
-}
-
 
 const char *	PmergeMe::WrongSyntaxisException::what() const throw() {
 	return "wrong syntaxis, try again!";

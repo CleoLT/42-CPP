@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:59:25 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/25 17:05:59 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:51:28 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,26 @@
 #include <vector>
 
 int tEquation(int k) {
-    return ( std::pow( 2, k + 1 ) + std::pow( -1, k )) / 3;
+    return ( std::pow( 2, k + 1 ) + (( k % 2 == 0 ) ? 1 : -1 )) / 3;
 }
 
 void	binaryInsertion( std::vector<int> & main_chain, int b ) {
 	std::vector<int>::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
-
 	main_chain.insert( position, b );
+}
+
+void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v ) {
+	int n = v.size();
+
+	for ( int i = 0; i + 1 < n; i +=2 ) {	
+		if ( v[i] > v[i + 1] ) {
+			a.push_back( v[i] );
+			b.push_back( v[i + 1] );
+		} else {
+			a.push_back( v[i + 1] );
+			b.push_back( v[i] );
+		}
+	}
 }
 
 void	printV( std::vector<int> const & v ) {
@@ -41,7 +54,7 @@ void	testTSequence() {
 
 	
 	std::vector<int>	b( 10, 10 );
-	std::vector<int>	t;					//calcular t sequence
+	std::vector<int>	t;				
 
 	while( t.size() < b.size()) 
 		t.push_back( tEquation( t.size() ));
@@ -51,7 +64,7 @@ void	testTSequence() {
 
 void	testBinaryInsertion() {
 
-	int					myints[] = {  1, 3, 6, 99, 333 };
+	int					myints[] = { 1, 3, 6, 99, 333 };
 	std::vector<int>	v( myints, myints + sizeof( myints ) / sizeof( int ));
 	
 	std::cout << "//TEST// binary insertion function" << std::endl;
@@ -78,40 +91,29 @@ void	testOrderB() {
 	std::cout << "a before: ";
 	printV( a );
 
-	std::vector<int>	t;						//calcular t sequence
+	std::vector<int>	t;				
 	while( t.size() < b.size()) 
 		t.push_back( tEquation( t.size() ));
 
 	std::vector<int>	main_chain( a );
-	int					b_size = b.size();		//ordenar los b en el orden inverso de t_sequence
+	int					b_size = b.size();	
 	for ( int i = t.size() - 1; i > 0; --i )		
 		for( int j = std::min( t[i], b_size ) - 1; j >= t[i - 1]; --j )
 			binaryInsertion( main_chain, b[j] );
-	
-
 
 	std::cout << "a after: ";
 	printV( main_chain );
 }
 
 void	testDividePairs() {
-	int					myints[] = { 20, 40, 100, 1, 3, 6, 90, 300 };
+	int					myints[] = { 20, 40, 100, 1, 3, 6, 90, 300, 55};
 	std::vector<int>	v( myints, myints + sizeof( myints ) / sizeof( int ));
-	int					n = v.size();
 
 	std::vector<int>	a;
 	std::vector<int>	b;
 
-	for ( int i = 0; i + 1 < n; i +=2 ) {		//dividir por pares, y ordenar a > b en la par
-		if ( v[i] > v[i + 1] ) {
-			a.push_back( v[i] );
-			b.push_back( v[i + 1] );
-		} else {
-			a.push_back( v[i + 1] );
-			b.push_back( v[i] );
-		}
-	}
-	
+	makePairs( a, b, v );
+
 	std::cout << "//TEST// divide and order pairs" <<std::endl;
 	std::cout << "all values: ";
 	printV( v );
