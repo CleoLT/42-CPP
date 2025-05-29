@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:53:29 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ private:
 	
 	void	parse();
 	
-	template<typename T>
-	void	printVector( std::vector<T> const & v ) const;
+	template<typename C>
+	void	printContainer( C const & c ) const;
 	
 	void	mergeInsertionVec( std::vector<int> & v );
+	void	mergeInsertionList( std::list<int> & v );
 	
 	PmergeMe();
 
@@ -49,12 +50,12 @@ public:
 	};
 };
 
-template<typename T>
-void	PmergeMe::printVector( std::vector<T> const & v ) const {
-	std::vector<T>					tmp( v );
+template<typename C>
+void	PmergeMe::printContainer( C const & c ) const {
+	C					tmp( c );
 
-	typename std::vector<T>::const_iterator	it;
-	typename std::vector<T>::const_iterator	ite = tmp.end();
+	typename C::const_iterator	it;
+	typename C::const_iterator	ite = tmp.end();
 	
 	int i = 0;
 	
@@ -63,12 +64,14 @@ void	PmergeMe::printVector( std::vector<T> const & v ) const {
 		std::cout << *it << " ";
 		i++;
 	}
-	std::cout << ( (v.size() > 10 ) ? " [...]" : " " ) << std::endl;
+	std::cout << ( (c.size() > 10 ) ? " [...]" : " " ) << std::endl;
 }
 
 int		tEquation( int k );
 void	binaryInsertion( std::vector<int> & main_chain, int b );
 void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v );
+void	makePairsList( std::list<int> & a, std::list<int> & b, std::list<int> & l );
+
 void	testBinaryInsertion();
 void	testTSequence();
 void	testOrderB();

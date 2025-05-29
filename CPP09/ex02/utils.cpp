@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:59:25 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:53:29 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,45 @@
 #include <complex>
 #include <algorithm>
 #include <vector>
+#include <list>
+#include <iostream>
 
 int tEquation(int k) {
     return ( std::pow( 2, k + 1 ) + (( k % 2 == 0 ) ? 1 : -1 )) / 3;
 }
-
+/*
+void	binaryInsertionList( std::vector<int> & main_chain, int b ) {
+	std::vector<int>::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
+	main_chain.insert( position, b );
+}
+*/
 void	binaryInsertion( std::vector<int> & main_chain, int b ) {
 	std::vector<int>::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
 	main_chain.insert( position, b );
+}
+
+void	makePairsList( std::list<int> & a, std::list<int> & b, std::list<int> & l ) {
+	
+	std::list<int>::iterator	it = l.begin();
+	std::list<int>::iterator	ite = l.end();
+	std::list<int>::iterator	next;
+
+	while ( it != ite ) {
+		next = it;
+		++next;
+		if ( next == ite ) {
+			a.push_back( l.back() );
+			break;
+		}
+		if ( *it > *next ) {
+			a.push_back( *it );
+			b.push_back( *next );
+		} else {
+			a.push_back( *next );
+			b.push_back( *it );
+		}
+		std::advance( it, 2 );
+	}
 }
 
 void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v ) {
@@ -38,87 +69,4 @@ void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v
 	}
 }
 
-void	printV( std::vector<int> const & v ) {
-	std::vector<int>					tmp( v );
 
-	std::vector<int>::iterator	it;
-	std::vector<int>::iterator	ite = tmp.end();
-
-	for ( it = tmp.begin(); it != ite; ++it )
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
-
-
-void	testTSequence() {
-
-	
-	std::vector<int>	b( 10, 10 );
-	std::vector<int>	t;				
-
-	while( t.size() < b.size()) 
-		t.push_back( tEquation( t.size() ));
-	std::cout << "//TEST// t_sequence: ";
-	printV( t );
-}
-
-void	testBinaryInsertion() {
-
-	int					myints[] = { 1, 3, 6, 99, 333 };
-	std::vector<int>	v( myints, myints + sizeof( myints ) / sizeof( int ));
-	
-	std::cout << "//TEST// binary insertion function" << std::endl;
-	std::cout << "Before:	";
-	printV( v );
-
-	binaryInsertion( v, 34 );
-	binaryInsertion( v, 3 );
-	binaryInsertion( v, 348 );
-	binaryInsertion( v, 45 );
-
-	std::cout << "After:	";
-	printV( v );
-}
-
-void	testOrderB() {
-	
-	int					myints[] = {  10, 64, 99, 333 };
-	int					myint[] = {  9, 4, 73, 56 };
-	std::vector<int>	a( myints, myints + sizeof( myints ) / sizeof( int ));
-	std::vector<int>	b( myint, myint + sizeof( myint ) / sizeof( int ));
-
-	std::cout << "//TEST// order b into a, a is sorted" << std::endl;
-	std::cout << "a before: ";
-	printV( a );
-
-	std::vector<int>	t;				
-	while( t.size() < b.size()) 
-		t.push_back( tEquation( t.size() ));
-
-	std::vector<int>	main_chain( a );
-	int					b_size = b.size();	
-	for ( int i = t.size() - 1; i > 0; --i )		
-		for( int j = std::min( t[i], b_size ) - 1; j >= t[i - 1]; --j )
-			binaryInsertion( main_chain, b[j] );
-
-	std::cout << "a after: ";
-	printV( main_chain );
-}
-
-void	testDividePairs() {
-	int					myints[] = { 20, 40, 100, 1, 3, 6, 90, 300, 55};
-	std::vector<int>	v( myints, myints + sizeof( myints ) / sizeof( int ));
-
-	std::vector<int>	a;
-	std::vector<int>	b;
-
-	makePairs( a, b, v );
-
-	std::cout << "//TEST// divide and order pairs" <<std::endl;
-	std::cout << "all values: ";
-	printV( v );
-	std::cout << "a: ";
-	printV( a );
-	std::cout << "b: ";
-	printV( b );
-}

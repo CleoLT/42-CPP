@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:55 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:48:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,51 @@ void	PmergeMe::sort() {
 	mergeInsertionVec( this->vec );
 
 	std::cout << "After:	";
-	printVector( this->vec );
+	printContainer( this->vec );
+	std::cout << "Time to process a range of 3000 elements with std::vector : " << "time" << " us" << std::endl;
+	std::cout << "Time to process a range of 3000 elements with std::list   : " << "time" << " us" << std::endl;
 	
 }
+
+void	PmergeMe::mergeInsertionList( std::list<int> & l ) {
+	int	n = l.size();
+	if ( n <= 1 ) return;
+
+	std::list<int>	a;
+	std::list<int>	b;
+
+	makePairsList( a, b, l );						//dividir por pares, y ordenar a > b en la par
+	
+		
+	mergeInsertionList( a );					//ordenar a recursivamente : merge insertion
+	
+	std::list<int>	t;						//calcular t sequence
+	int					i = 0;
+	
+	while (true) {
+		int next = tEquation( i );
+		if ( next >= (int)b.size())
+			break;
+		t.push_back( next );
+		++i;
+	}
+	
+	std::list<int>	main_chain( a );
+
+/*	binaryInsertion( main_chain, b[0] );
+	
+	for ( int i = t.size() - 1; i > 0; --i ) 		// insertar los b en bloques de t, en el orden inverso de t_sequence
+		for( int j = std::min( t[i], (int)b.size()) - 1; j >= t[i - 1]; --j ) 
+			binaryInsertion( main_chain, b[j] );
+
+	//Insertar elementos restantes de b que no fueron cubiertos por los bloques de t
+	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j )
+		binaryInsertion(main_chain, b[j]);
+
+	l = main_chain;
+*/
+}
+
 
 void	PmergeMe::mergeInsertionVec( std::vector<int> & v ) {
 	int	n = v.size();
@@ -110,10 +152,10 @@ void	PmergeMe::parse() {
 		this->vec.push_back( tmp );
 		this->list.push_back( tmp );
 	}
+//	std::cout << "Before:	";
+//	printContainer( this->vec );
 	std::cout << "Before:	";
-	printVector( this->vec );
-	std::cout << "Before:	";
-//	printVector( this->list );
+	printContainer( this->list );
 }
 
 const char *	PmergeMe::WrongSyntaxisException::what() const throw() {
