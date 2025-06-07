@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:59:25 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/29 15:53:29 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:25:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 int tEquation(int k) {
     return ( std::pow( 2, k + 1 ) + (( k % 2 == 0 ) ? 1 : -1 )) / 3;
 }
-/*
-void	binaryInsertionList( std::vector<int> & main_chain, int b ) {
-	std::vector<int>::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
-	main_chain.insert( position, b );
-}
-*/
-void	binaryInsertion( std::vector<int> & main_chain, int b ) {
-	std::vector<int>::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
-	main_chain.insert( position, b );
-}
 
 void	makePairsList( std::list<int> & a, std::list<int> & b, std::list<int> & l ) {
 	
@@ -41,7 +31,7 @@ void	makePairsList( std::list<int> & a, std::list<int> & b, std::list<int> & l )
 		next = it;
 		++next;
 		if ( next == ite ) {
-			a.push_back( l.back() );
+			a.push_back( l.back() );			//si l.size() impar
 			break;
 		}
 		if ( *it > *next ) {
@@ -67,6 +57,8 @@ void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v
 			b.push_back( v[i] );
 		}
 	}
+
+	if ( n % 2 != 0 ) a.push_back( v[n - 1] );	//si v.size() impar
 }
 
 

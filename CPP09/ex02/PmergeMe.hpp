@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/29 15:53:29 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:13:19 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,14 @@ void	PmergeMe::printContainer( C const & c ) const {
 	std::cout << ( (c.size() > 10 ) ? " [...]" : " " ) << std::endl;
 }
 
+template<typename C>
+void	binaryInsertion( C & main_chain, int b ) {
+	typename C::iterator	position = lower_bound( main_chain.begin(), main_chain.end(), b );
+	main_chain.insert( position, b );
+}
+
+
 int		tEquation( int k );
-void	binaryInsertion( std::vector<int> & main_chain, int b );
 void	makePairs( std::vector<int> & a, std::vector<int> & b, std::vector<int> & v );
 void	makePairsList( std::list<int> & a, std::list<int> & b, std::list<int> & l );
 
