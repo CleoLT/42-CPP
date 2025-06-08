@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/06/07 12:13:19 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:52:23 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ private:
 	std::vector<std::string>	param;
 	std::vector<int>			vec;
 	std::list<int>				list;
+	int							size;
 	
 	void	parse();
 	
@@ -32,6 +33,7 @@ private:
 	
 	void	mergeInsertionVec( std::vector<int> & v );
 	void	mergeInsertionList( std::list<int> & v );
+	void	printUs( timeval start, timeval end, std::string container_type );	
 	
 	PmergeMe();
 
@@ -43,6 +45,7 @@ public:
 	PmergeMe &	operator=( const PmergeMe & rhs );
 
 	void	sort();
+	void	testSameOrder() const ;
 
 	class	WrongSyntaxisException : public std::exception {
 	public:

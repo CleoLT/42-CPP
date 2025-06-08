@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/06/07 17:25:02 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:02:55 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <sys/time.h>
 
 PmergeMe::PmergeMe( char **argv ) {
 	for ( int i = 1; argv[i]; i++ )
@@ -38,18 +39,35 @@ PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 	return *this;
 }
 
+void	PmergeMe::printUs( timeval start, timeval end, std::string container_type ) {
+    long	seconds = end.tv_sec - start.tv_sec;
+	long	useconds = end.tv_usec - start.tv_usec;
+	long	total = seconds * 1000000 + useconds;
+
+	std::cout << "Time to process a range of " << this->size << " elements with std::" << container_type << " : ";
+	std::cout << total << " us" << std::endl;
+}
 
 void	PmergeMe::sort() {
 
+	timeval	start, end;
+	
+	gettimeofday( &start, NULL );
 	mergeInsertionVec( this->vec );
+	gettimeofday( &end, NULL );
+
 	std::cout << "After:	";
 	printContainer( this->vec );
-	std::cout << "Time to process a range of 3000 elements with std::vector : " << "time" << " us" << std::endl;
-	
+	printUs( start, end, "vector" );
+
+	gettimeofday( &start, NULL );
 	mergeInsertionList( this->list );
+	gettimeofday( &end, NULL );
+
+
 	std::cout << "After:	";
 	printContainer( this->list );
-	std::cout << "Time to process a range of 3000 elements with std::list   : " << "time" << " us" << std::endl;
+	printUs( start, end, "list  " );
 }
 
 void	PmergeMe::mergeInsertionList( std::list<int> & l ) {
@@ -101,7 +119,7 @@ void	PmergeMe::mergeInsertionList( std::list<int> & l ) {
 		}
 	}
 
-	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j ) { 
+	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j ) { //insertar elementos restantes 
 		tmp_it = b.begin();
 		std::advance(tmp_it, j);	
 		binaryInsertion(main_chain, *tmp_it);
@@ -176,8 +194,26 @@ void	PmergeMe::parse() {
 	}
 	std::cout << "Before:	";
 	printContainer( this->list );
+	this->size = this->param.size();
 }
 
 const char *	PmergeMe::WrongSyntaxisException::what() const throw() {
 	return "wrong syntaxis, try again!";
 }
+
+void	PmergeMe::testSameOrder() const {
+	std::vector<int>::const_iterator	v_it;
+	std::vector<int>::const_iterator	v_ite = this->vec.end();
+	std::list<int>::const_iterator		l_it = this->list.begin();
+	std::list<int>::const_iterator		l_ite = this->list.end();
+
+	for ( v_it = this->vec.begin(); v_it != v_ite; ++v_it ) {
+		if ( l_it == l_ite || *l_it != *v_it ) {
+			std::cout << "same order test failed!!" << std::endl;
+			return;
+		}
+		++l_it;
+	}
+	std::cout << "same order test passed!!" << std::endl;
+}
+

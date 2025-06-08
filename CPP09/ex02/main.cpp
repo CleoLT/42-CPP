@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/29 13:38:36 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:11:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,23 @@ int main( int argc, char * argv[] ) {
 		return 1;
 	}
 
-/*	testBinaryInsertion();
+	testBinaryInsertion();
 	std::cout << "----------------------------" << std::endl;
 	testTSequence();
 	std::cout << "----------------------------" << std::endl;
 	testOrderB();
-*/	std::cout << "----------------------------" << std::endl;
+	std::cout << "----------------------------" << std::endl;
 	testDividePairs();
 	std::cout << "----------------------------" << std::endl;
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 
 	try {
 		PmergeMe	algo( argv );
 		PmergeMe	cpy( algo );
-		algo.sort();		
+		algo.sort();
+
+		std::cout << std::endl;
+		algo.testSameOrder();
 	} catch ( std::exception & e ) {
 		std::cout << "Error: " << e.what() << std::endl;
 	}
