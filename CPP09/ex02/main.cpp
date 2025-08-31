@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/06/08 11:11:02 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/08/31 17:53:49 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main( int argc, char * argv[] ) {
 		return 1;
 	}
 
-	testBinaryInsertion();
+/*	testBinaryInsertion();
 	std::cout << "----------------------------" << std::endl;
 	testTSequence();
 	std::cout << "----------------------------" << std::endl;
@@ -28,7 +28,7 @@ int main( int argc, char * argv[] ) {
 	testDividePairs();
 	std::cout << "----------------------------" << std::endl;
 	std::cout << std::endl;
-
+*/
 	try {
 		PmergeMe	algo( argv );
 		PmergeMe	cpy( algo );

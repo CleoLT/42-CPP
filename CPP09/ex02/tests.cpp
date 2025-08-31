@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:42:10 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/06/08 10:53:27 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:27:54 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	testTSequence() {
 	std::vector<int>	t;				
 
 	while( t.size() < b.size()) 
-		t.push_back( tEquation( t.size() ));
+		t.push_back( PmergeMe::tEquation( t.size() ));
 	std::cout << "//TEST// t_sequence: ";
 	printC( t );
 }
@@ -72,7 +72,7 @@ void	testOrderB() {
 
 	std::vector<int>	t;				
 	while( t.size() < b.size()) 
-		t.push_back( tEquation( t.size() ));
+		t.push_back( PmergeMe::tEquation( t.size() ));
 
 	std::vector<int>	main_chain( a );
 	int					b_size = b.size();	

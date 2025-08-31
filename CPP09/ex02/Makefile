@@ -1,10 +1,10 @@
 NAME	= PmergeMe
 
 CC		= c++
-CFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM		= rm -f
 
-SRCS	= main.cpp PmergeMe.cpp utils.cpp tests.cpp
+SRCS	= main.cpp PmergeMe.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all:	$(NAME)

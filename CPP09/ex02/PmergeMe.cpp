@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:40:49 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/06/08 11:02:55 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:27:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <deque>
 #include <sstream>
 #include <algorithm>
 #include <iterator>
@@ -34,7 +35,7 @@ PmergeMe::~PmergeMe() {}
 PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 	if ( this != &rhs ) {
 		this->vec = std::vector<int>( rhs.vec );
-		this->list = std::list<int>( rhs.list );
+		this->deq = std::deque<int>( rhs.deq );
 	}
 	return *this;
 }
@@ -53,7 +54,7 @@ void	PmergeMe::sort() {
 	timeval	start, end;
 	
 	gettimeofday( &start, NULL );
-	mergeInsertionVec( this->vec );
+	mergeInsertion( this->vec );
 	gettimeofday( &end, NULL );
 
 	std::cout << "After:	";
@@ -61,111 +62,13 @@ void	PmergeMe::sort() {
 	printUs( start, end, "vector" );
 
 	gettimeofday( &start, NULL );
-	mergeInsertionList( this->list );
+	mergeInsertion( this->deq );
 	gettimeofday( &end, NULL );
 
-
 	std::cout << "After:	";
-	printContainer( this->list );
-	printUs( start, end, "list  " );
+	printContainer( this->deq );
+	printUs( start, end, "deque " );
 }
-
-void	PmergeMe::mergeInsertionList( std::list<int> & l ) {
-	int	n = l.size();
-	if ( n <= 1 ) return;
-
-	std::list<int>	a;
-	std::list<int>	b;
-
-	makePairsList( a, b, l );						//dividir por pares, y ordenar a > b en la par
-	
-	mergeInsertionList( a );						//ordenar a recursivamente : merge insertion
-	
-	std::list<int>	t;								//calcular t sequence
-	int					i = 0;
-	
-	while (true) {
-		int next = tEquation( i );
-		if ( next >= (int)b.size())
-			break;
-		t.push_back( next );
-		++i;
-	}
-	
-	std::list<int>	main_chain( a );
-
-	binaryInsertion( main_chain, b.front());
-
-	std::list<int>::reverse_iterator	rit, next;	// insertar los b en bloques de t, en el orden inverso de t_sequence
-	std::list<int>::reverse_iterator	rite = t.rend();
-	std::list<int>::iterator			upper_it, lower_it, tmp_it;
-
-	for (rit = t.rbegin(); rit != rite; ++rit) {
-		next = rit;
-		++next;
-		if (next == rite) break;
-	
-		int upper = std::min(*rit, (int)b.size());
-		int lower = *next;
-
-		lower_it = b.begin();
-		upper_it = b.begin();
-		std::advance(lower_it, lower);
-		std::advance(upper_it, upper);
-	
-		while (upper_it != lower_it) {
-			--upper_it;
-			binaryInsertion(main_chain, *upper_it);
-		}
-	}
-
-	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j ) { //insertar elementos restantes 
-		tmp_it = b.begin();
-		std::advance(tmp_it, j);	
-		binaryInsertion(main_chain, *tmp_it);
-	}
-
-	l = main_chain;
-
-}
-
-
-void	PmergeMe::mergeInsertionVec( std::vector<int> & v ) {
-	int	n = v.size();
-	if ( n <= 1 ) return;
-
-	std::vector<int>	a;
-	std::vector<int>	b;
-
-	makePairs( a, b, v );						//dividir por pares, y ordenar a > b en la par
-		
-	mergeInsertionVec( a );						//ordenar a recursivamente : merge insertion
-	
-	std::vector<int>	t;						//calcular t sequence
-	int					i = 0;
-	
-	while (true) {
-		int next = tEquation( i );
-		if ( next >= (int)b.size())
-			break;
-		t.push_back( next );
-		++i;
-	}
-	
-	std::vector<int>	main_chain( a );
-
-	binaryInsertion( main_chain, b[0] );
-	
-	for ( int i = t.size() - 1; i > 0; --i ) 		// insertar los b en bloques de t, en el orden inverso de t_sequence
-		for( int j = std::min( t[i], (int)b.size()) - 1; j >= t[i - 1]; --j ) 
-			binaryInsertion( main_chain, b[j] );
-
-	//Insertar elementos restantes de b que no fueron cubiertos por los bloques de t
-	for ( size_t j = t.empty() ? 1 : t.back(); j < b.size(); ++j )
-		binaryInsertion(main_chain, b[j]);
-
-	v = main_chain;
-} 
 
 void	PmergeMe::parse() {
 	std::vector<std::string>::const_iterator	it;
@@ -190,10 +93,10 @@ void	PmergeMe::parse() {
 				throw WrongSyntaxisException();
 		}
 		this->vec.push_back( tmp );
-		this->list.push_back( tmp );
+		this->deq.push_back( tmp );
 	}
 	std::cout << "Before:	";
-	printContainer( this->list );
+	printContainer( this->deq );
 	this->size = this->param.size();
 }
 
@@ -204,16 +107,19 @@ const char *	PmergeMe::WrongSyntaxisException::what() const throw() {
 void	PmergeMe::testSameOrder() const {
 	std::vector<int>::const_iterator	v_it;
 	std::vector<int>::const_iterator	v_ite = this->vec.end();
-	std::list<int>::const_iterator		l_it = this->list.begin();
-	std::list<int>::const_iterator		l_ite = this->list.end();
+	std::deque<int>::const_iterator		d_it = this->deq.begin();
+	std::deque<int>::const_iterator		d_ite = this->deq.end();
 
 	for ( v_it = this->vec.begin(); v_it != v_ite; ++v_it ) {
-		if ( l_it == l_ite || *l_it != *v_it ) {
+		if ( d_it == d_ite || *d_it != *v_it ) {
 			std::cout << "same order test failed!!" << std::endl;
 			return;
 		}
-		++l_it;
+		++d_it;
 	}
 	std::cout << "same order test passed!!" << std::endl;
 }
 
+int PmergeMe::tEquation(int k) {
+    return ( std::pow( 2, k + 1 ) + (( k % 2 == 0 ) ? 1 : -1 )) / 3;
+}
