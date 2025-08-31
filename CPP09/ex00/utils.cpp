@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:19:37 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/07 15:42:13 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:27:20 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+
+time_t	makeFirstBitcoin() {
+	std::tm t;
+    t.tm_year = 2009 - 1900; 
+    t.tm_mon  = 0;           
+    t.tm_mday = 2;           
+	t.tm_hour = 0;
+    t.tm_min  = 0;
+    t.tm_sec  = 0;
+    t.tm_isdst = -1;        
+
+    return std::mktime(&t);
+}
 
 bool	invalidDate( std::string const & l, time_t * date ) {
 	int	num[] = { 0, 1, 2, 3, 5, 6, 8, 9 };
@@ -27,6 +40,7 @@ bool	invalidDate( std::string const & l, time_t * date ) {
 		return true;
 
 	time_t		current = std::time( NULL );
+	time_t		first_bitcoin = makeFirstBitcoin();
 	struct tm 	timeinfo;
 	int			y = atoi( l.substr( 0, 4 ).c_str());
 	int			m = atoi( l.substr( 5, 2 ).c_str());
@@ -45,7 +59,7 @@ bool	invalidDate( std::string const & l, time_t * date ) {
 	if ( *date == -1 || timeinfo.tm_year != y - 1900 || timeinfo.tm_mon != m - 1 || timeinfo.tm_mday != d )
 		return true;
 
-	if ( *date > current )
+	if ( *date > current || *date < first_bitcoin )
 		return true;
 
 	return false;
