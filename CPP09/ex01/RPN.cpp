@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:11:01 by cle-tron          #+#    #+#             */
-/*   Updated: 2025/05/15 17:16:18 by cle-tron         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:39:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int	RPN::whichOperator() const {
 
 
 void	RPN::makeCalculation() {
+
+//	if ( this->out.empty()) NotEnoughNumbersException();
+
 	int	tmp = this->out.top();
 	
 	this->out.pop();
@@ -100,8 +103,13 @@ void	RPN::makeCalculation() {
 }
 
 int	RPN::output() {
+	if ( this->in.empty() ) throw NotEnoughNumbersException();
+
+	int	arg_check = 0;
+	int	calc_check = 0;
 
 	while ( !this->in.empty() ) {
+		arg_check++;
 		if ( this->in.top() == "0" || this->in.top() == "+0" || this->in.top() == "-0" ) {
 			this->out.push( 0 );
 			this->in.pop();
@@ -111,6 +119,8 @@ int	RPN::output() {
 			this->in.pop();
 		}
 		else {
+			calc_check++;
+			if ( calc_check == arg_check )throw NotEnoughNumbersException();
 			makeCalculation( ); 
 		}
 	}
